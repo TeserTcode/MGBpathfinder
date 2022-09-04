@@ -1,5 +1,5 @@
-0=3
-#1-3  3 should be good
+0=2
+#1-3  3 should be goodfor custom 2 is better on smaller ships
 1=1
 #telorance for shwoing the best 1=show same performance 0=dont show anything until something better
 2=20
@@ -14,7 +14,9 @@
 #weights of tiles ex.
 7=50000
 #maximum iteration for pathfinding (not matter much)
-8=10
+8=5
 #randomly turns wrongly
+9=0
+#disable portals (1=portal 0=no portal)
 
 

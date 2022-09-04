@@ -17,6 +17,7 @@ int main(int argc, char** argv) {
 	double wem[]={0,0,0,0,-3,0,0,0,0,0,0,0,0};//weights of tiles ex.{0,0,0,0,-2.5,.5,0,0,0,0,0,0,0}
 	int maxit=50000;//maximum iteration for pathfinding (not matter much)
 	int rndrt=30;//randomly turns wrongly
+	int isprt=1;//use prtals
 	
 	
 	int tilelen=0;
@@ -62,7 +63,7 @@ int main(int argc, char** argv) {
             	//case 6: raytr=value; break;
             	if(name=="7"){maxit=num;}
             	if(name=="8"){rndrt=num;}
-            	
+            	if(name=="9"){isprt=num;}
             	if(name=="4"){
             		
             		int lngng=0;
@@ -122,7 +123,7 @@ int main(int argc, char** argv) {
 	
 	
 	
-	std::cout<<std::endl<<"choose mod 0-custom 1-named cutsom  4-lite bruteforce " ;
+	std::cout<<std::endl<<"choose mod 0-custom 1-named cutsom  4-lite bruteforce 7-classic ships " ;
 	std::cin>>mod;
 	if(mod==4 or mod==5){
 		std::cout<<std::endl<<"how long";
@@ -248,7 +249,7 @@ case 9:
 	std::cout<<std::endl;}
 	if (mod==7){
 		int shipi=0;
-				std::cout<<std::endl<<"ship waht 0-rþder used 1-rider ... 7-fighter";
+				std::cout<<std::endl<<"ship waht 0-rþder used 1-rider ... use ship id  (33broken :( )";
 				std::cin>>shipi;
 				shipid=shipi;
 	}
@@ -500,48 +501,58 @@ if(mod==1){
 				1,1,1,1,1,1,1,1,1,1,1,0};
 				
 				
-		/*		switch(shipid){
-					case 0://rider used
-					karr[4][5]=9;
-					karr[5][5]=0;
-					karr[6][5]=0;
-					yt=6;
-					xt=5;
-					break;
-					case 1://rider 
-					karr[4][5]=9;
-					karr[5][5]=0;
-					karr[6][5]=0;
-					karr[7][5]=0;
-					yt=7;
-					xt=5;
-					break;
-					case 7://fighter
-					karr[4][3]=0;	karr[5][3]=0;
-					karr[6][3]=0;	karr[7][3]=0;
-					karr[4][4]=0;	karr[5][4]=0;
-					karr[6][4]=0;	karr[6][5]=0;
-					karr[6][6]=0;	karr[5][6]=0;
-					karr[4][6]=0;karr[3][6]=9;
-					yt=7;
-					xt=3;
-					break;
-					case 11://fbacksword
-					karr[8][5]=0;
-					karr[7][2]=9;karr[7][3]=0;karr[7][4]=0;karr[7][5]=0;karr[7][6]=0;karr[7][7]=0;karr[7][8]=9;
-					karr[6][4]=0;karr[6][5]=0;karr[6][6]=0;
-					karr[5][3]=0;karr[5][4]=0;karr[5][5]=0;karr[5][6]=0;karr[5][7]=0;
-					karr[4][3]=0;karr[4][4]=0;karr[4][5]=0;karr[4][6]=0;karr[4][7]=0;
-					karr[3][4]=0;karr[3][5]=0;karr[3][6]=0;
-					yt=8;
-					xt=5;
-					break;
-					case 11://containership
-					
-					break;
-					
-					
-				}*/
+				
+				std::ifstream cFile ("class.txt");
+    if (cFile.is_open())
+    {
+        std::string line;
+       
+            	
+            	int readline=0;
+            	//readline=shipid*144;
+            int otot=0;
+            char lineread='1';
+            getline(cFile, line);
+            int shipidc=shipid;
+            for(int shipidf=0;shipidf<shipidc;shipidf++){
+            getline(cFile, line);getline(cFile, line);getline(cFile, line);
+			getline(cFile, line);getline(cFile, line);getline(cFile, line);
+			getline(cFile, line);getline(cFile, line);getline(cFile, line);
+			getline(cFile, line);getline(cFile, line);getline(cFile, line);	
+			}
+            
+					for(int trr=0;trr<12;trr++){
+						for(int krr=0;krr<12;krr++){
+							readline++;
+							lineread=line[readline];
+						//	std::cout<<lineread;
+							if(lineread=='0'){
+							otot=0;}
+							if(lineread=='1'){
+							otot=1;}
+							if(lineread=='9'){
+							otot=9;}
+							if(lineread=='6'){
+							otot=6;}
+							if(lineread=='s'){
+							xt=krr;yt=trr;otot=-0;}
+						if(otot!=-69){
+						
+						karr[trr][krr]=otot;}
+					}
+								
+                                 readline=0;
+                                 getline(cFile, line);
+        }
+		}else{
+			std::cout<<"get the class.txt file to use classcccsic ships";
+		}
+			
+				
+			
+				
+				
+				
 			
 				
 				kilo=klma/2;
@@ -621,6 +632,7 @@ if(mod==1){
 			it=maxit;
 		}
 		int doneport=0;
+		bool strtcrs=0;
 	while(arr[y][x]!=9 and it < maxit){
 		it++;
 		
@@ -656,14 +668,18 @@ if(mod==1){
 		for(int cros=0;cros<4;cros++){
 		for(int croc=0;croc<4;croc++){
 			if(inp[cros][croc]==9){
-			arr[3*cros+2][3*croc+1]=0;
-			arr[3*cros+1][3*croc+2]=0;}
+			sarr[3*cros+2][3*croc+1]=arr[3*cros+2][3*croc+1];  arr[3*cros+2][3*croc+1]=0;
+			sarr[3*cros+1][3*croc+2]=arr[3*cros+1][3*croc+2];  arr[3*cros+1][3*croc+2]=0;}
 			if(inp[cros][croc]==12){
 			if(arr[3*cros+2][3*croc+1]!=0){sarr[3*cros+2][3*croc+1]=arr[3*cros+2][3*croc+1];arr[3*cros+2][3*croc+1]=0;}}
 			
 			
 			
 			}}
+			if(arr[yt-1][xt]<6 and arr[yt-1][xt]>1){
+			if(sarr[yt-1][xt]!=0){strtcrs=1;	}
+			sarr[yt-1][xt]=arr[yt-1][xt];  arr[yt-1][xt]=0;}
+			
 	//	x--;break;
 	int nofront =   0 ;
 			switch(dir){
@@ -673,7 +689,7 @@ if(mod==1){
 				case 4: if(arr[y][x-1]!=0){nofront=1;}break;  
 			}
 		nofront =   0 ;
-			if((modd!=9 and modd!=8  and (rnd>bst or (mod==4 and nofront)))or
+			if(modd!=9 and modd!=8  and (rnd>bst or (mod==4 and nofront ))or(mod==7 and rnd*2>bst)or
 			 (modd==8 and strr!=1 and 1+rand()%strr>strr/2 and bst%strr!=0)){	
 			switch (raytr){
 			case 3:switch (dir){case 1:
@@ -742,10 +758,32 @@ if(mod==1){
 				if(!(((arr[y][x]==0 or arr[y][x]==9 or arr[y][x]==12  or arr[y][x]==6)and(x<12 and x>-1 and y<12 and y>-1))) 
 				){
 					
+			if(mod==7 and arr[y][x]!=1 and (arr[y][x]==dir-2 or arr[y][x]==dir+2 or arr[y][x]==dir)and
+			(dir==1 and arr[y-1][x]==0)and
+			(dir==2 and arr[y][x+1]==0)and
+			(dir==3 and arr[y+1][x]==0)and
+			(dir==4 and arr[y][x-1]==0)
+			){
 			
 				
 			switch(dir){
 					case 1:
+						sarr[y][x]=6;
+						y--;break;
+					case 2:
+						sarr[y][x]=6;
+						x++;break;
+					case 3:
+						sarr[y][x]=6;
+						y++;break;
+					case 4:
+						sarr[y][x]=6;
+						x--;break;
+				}
+					//arr[y][x]=0;
+		}else{
+			switch(dir){
+				case 1:
 						y++;
 					break;
 					case 2:
@@ -758,8 +796,7 @@ if(mod==1){
 					case 4:
 						x++;
 					break;}
-					//arr[y][x]=0;
-			
+		}
 				}else{
 					if(dir!=ogdir){trn++;					}
 					ogdir=dir;
@@ -785,7 +822,7 @@ if(mod==1){
 			
 		arr[y][x]=0;}else{
 			int prtit=0;
-			if(doneport==0){
+			if(doneport==0 and isprt==1){
 				if(arr[y][x]==1){
 					it=maxit;
 				}
@@ -793,8 +830,13 @@ if(mod==1){
 					prtin[1]=x;
 				while(arr[y][x]!=0 and prtit<144){
 					prtit++;
-					x=rand()%12;
+					if(mod==7){
+					
+					x=rand()%11;
+					y=1+rand()%11;}else{
+						x=rand()%12;
 					y=rand()%12;
+					}
 					if(arr[y][x]!=0){
 						prtot[0]=y;
 					prtot[1]=x;
@@ -833,7 +875,7 @@ if(mod==1){
 				x=dx;
 			y=dy;
 			pth--;
-			trn++;
+		//	trn++;
 			
 					switch(ogdir){
 					case 1:
@@ -1072,6 +1114,9 @@ for(int cros=1;cros<11;cros++){
 		}
 			
 			}}
+			if(strtcrs){
+				sarr[yt-1][xt]=6;
+			}
 			
 if(inp[3][3]==6 and arr[11][9]==1){
 arr[11][9]=0;
@@ -1233,6 +1278,9 @@ arr[11][9]=0;
 	 wbw=0;//wave to wave
 	 aut=0;//autopilot
 	 srt=0;//start*/
+	 if(mod=7){
+	 	pth3--;
+	 }
 	if(it==maxit){
 		std::cout<<"there no path thogh"<<std::endl;
 		std::cout<<std::endl<<best<<"-"<<bst;
