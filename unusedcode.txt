@@ -1,0 +1,122 @@
+		for (int intak=0;intak<4;intak++){
+			
+			
+			switch(inp[intar][intak]){
+				case 0:
+					
+					arr[iax+0][iay+0]= 1;  arr[iax+0][iay+1]= 1;  arr[iax+0][iay+2]= 1;
+					arr[iax+1][iay+0]= 1;  arr[iax+1][iay+1]= 1;  arr[iax+1][iay+2]= 1;
+					arr[iax+2][iay+0]= 1;  arr[iax+2][iay+1]= 1;  arr[iax+2][iay+2]= 1;
+				break;
+				case 1:
+					ejy++;
+					arr[iax+0][iay+0]= 1;  arr[iax+0][iay+1]= 1;  arr[iax+0][iay+2]= 1;
+					arr[iax+1][iay+0]= 1;  arr[iax+1][iay+1]= 9;  arr[iax+1][iay+2]= 1;
+					arr[iax+2][iay+0]= 1;  arr[iax+2][iay+1]= 0;  arr[iax+2][iay+2]= 0;
+				break;
+				case 2:
+					aut++;
+					arr[iax+0][iay+0]= 1;  arr[iax+0][iay+1]= 0;  arr[iax+0][iay+2]= 0;
+					arr[iax+1][iay+0]= 1;  arr[iax+1][iay+1]= 1;  arr[iax+1][iay+2]= 0;
+					arr[iax+2][iay+0]= 1;  arr[iax+2][iay+1]= 0;  arr[iax+2][iay+2]= 0;
+				break;
+				case 3:
+					trr++;
+					arr[iax+0][iay+0]= 1;  arr[iax+0][iay+1]= 0;  arr[iax+0][iay+2]= 0;
+					arr[iax+1][iay+0]= 1;  arr[iax+1][iay+1]= 0;  arr[iax+1][iay+2]= 1;
+					arr[iax+2][iay+0]= 0;  arr[iax+2][iay+1]= 0;  arr[iax+2][iay+2]= 1;
+				break;
+				case 4:
+					gre++;
+					arr[iax+0][iay+0]= 1;  arr[iax+0][iay+1]= 1;  arr[iax+0][iay+2]= 1;
+					arr[iax+1][iay+0]= 0;  arr[iax+1][iay+1]= 0;  arr[iax+1][iay+2]= 0;
+					arr[iax+2][iay+0]= 1;  arr[iax+2][iay+1]= 0;  arr[iax+2][iay+2]= 1;
+				break;
+				case 5:
+					emp++;
+					arr[iax+0][iay+0]= 0;  arr[iax+0][iay+1]= 0;  arr[iax+0][iay+2]= 0;
+					arr[iax+1][iay+0]= 0;  arr[iax+1][iay+1]= 0;  arr[iax+1][iay+2]= 0;
+					arr[iax+2][iay+0]= 0;  arr[iax+2][iay+1]= 0;  arr[iax+2][iay+2]= 0;
+				break;
+				case 6:
+					wbw++;
+					arr[iax+0][iay+0]= 0;  arr[iax+0][iay+1]= 0;  arr[iax+0][iay+2]= 1;
+					arr[iax+1][iay+0]= 0;  arr[iax+1][iay+1]= 0;  arr[iax+1][iay+2]= 1;
+					arr[iax+2][iay+0]= 0;  arr[iax+2][iay+1]= 0;  arr[iax+2][iay+2]= 1;
+				break;
+				case 7:
+					cnt++;
+					arr[iax+0][iay+0]= 0;  arr[iax+0][iay+1]= 0;  arr[iax+0][iay+2]= 0;
+					arr[iax+1][iay+0]= 0;  arr[iax+1][iay+1]= 0;  arr[iax+1][iay+2]= 0;
+					arr[iax+2][iay+0]= 1;  arr[iax+2][iay+1]= 1;  arr[iax+2][iay+2]= 1;
+				break;
+				case 8:
+					srt++;
+					arr[iax+0][iay+0]= 0;  arr[iax+0][iay+1]= 1;  arr[iax+0][iay+2]= 1;
+					arr[iax+1][iay+0]= 0;  arr[iax+1][iay+1]= 0;  arr[iax+1][iay+2]= 0;
+					arr[iax+2][iay+0]= 1;  arr[iax+2][iay+1]= 1;  arr[iax+2][iay+2]= 0;
+				break;
+				case 9:
+					skp++;
+					arr[iax+0][iay+0]= 1;  arr[iax+0][iay+1]= 1;  arr[iax+0][iay+2]= 0;
+					arr[iax+1][iay+0]= 1;  arr[iax+1][iay+1]= 0;  arr[iax+1][iay+2]= 0;
+					arr[iax+2][iay+0]= 0;  arr[iax+2][iay+1]= 0;  arr[iax+2][iay+2]= 0;
+				break;
+				case 10:
+					xrc++;
+					arr[iax+0][iay+0]= 1;  arr[iax+0][iay+1]= 0;  arr[iax+0][iay+2]= 0;
+					arr[iax+1][iay+0]= 0;  arr[iax+1][iay+1]= 1;  arr[iax+1][iay+2]= 0;
+					arr[iax+2][iay+0]= 0;  arr[iax+2][iay+1]= 0;  arr[iax+2][iay+2]= 1;
+				break;
+				case 11:
+					ejx++;
+					arr[iax+0][iay+0]= 1;  arr[iax+0][iay+1]= 1;  arr[iax+0][iay+2]= 1;
+					arr[iax+1][iay+0]= 0;  arr[iax+1][iay+1]= 9;  arr[iax+1][iay+2]= 0;
+					arr[iax+2][iay+0]= 1;  arr[iax+2][iay+1]= 1;  arr[iax+2][iay+2]= 1;
+				break;
+				case 12:
+					crc++;
+					arr[iax+0][iay+0]= 1;  arr[iax+0][iay+1]= 0;  arr[iax+0][iay+2]= 1;
+					arr[iax+1][iay+0]= 1;  arr[iax+1][iay+1]= 0;  arr[iax+1][iay+2]= 1;
+					arr[iax+2][iay+0]= 0;  arr[iax+2][iay+1]= 0;  arr[iax+2][iay+2]= 0;
+				break;
+				case 13:
+					
+					arr[iax+0][iay+0]= 1;  arr[iax+0][iay+1]= 0;  arr[iax+0][iay+2]= 1;
+					arr[iax+1][iay+0]= 0;  arr[iax+1][iay+1]= 0;  arr[iax+1][iay+2]= 0;
+					arr[iax+2][iay+0]= 1;  arr[iax+2][iay+1]= 0;  arr[iax+2][iay+2]= 0;
+				break;
+				case 14:
+					
+					arr[iax+0][iay+0]= 1;  arr[iax+0][iay+1]= 0;  arr[iax+0][iay+2]= 0;
+					arr[iax+1][iay+0]= 1;  arr[iax+1][iay+1]= 0;  arr[iax+1][iay+2]= 0;
+					arr[iax+2][iay+0]= 1;  arr[iax+2][iay+1]= 0;  arr[iax+2][iay+2]= 0;
+				break;
+				case 15:
+					
+					arr[iax+0][iay+0]= 1;  arr[iax+0][iay+1]= 1;  arr[iax+0][iay+2]= 1;
+					arr[iax+1][iay+0]= 0;  arr[iax+1][iay+1]= 0;  arr[iax+1][iay+2]= 0;
+					arr[iax+2][iay+0]= 0;  arr[iax+2][iay+1]= 0;  arr[iax+2][iay+2]= 0;
+				break;
+				case 16:
+					
+					arr[iax+0][iay+0]= 0;  arr[iax+0][iay+1]= 0;  arr[iax+0][iay+2]= 1;
+					arr[iax+1][iay+0]= 0;  arr[iax+1][iay+1]= 0;  arr[iax+1][iay+2]= 0;
+					arr[iax+2][iay+0]= 1;  arr[iax+2][iay+1]= 0;  arr[iax+2][iay+2]= 0;
+				break;
+				case 17:
+					
+					arr[iax+0][iay+0]= 1;  arr[iax+0][iay+1]= 0;  arr[iax+0][iay+2]= 0;
+					arr[iax+1][iay+0]= 0;  arr[iax+1][iay+1]= 0;  arr[iax+1][iay+2]= 1;
+					arr[iax+2][iay+0]= 1;  arr[iax+2][iay+1]= 0;  arr[iax+2][iay+2]= 0;
+				break;
+				
+				
+			}
+			
+		
+			
+			
+			
+		iay+=3;
+	}

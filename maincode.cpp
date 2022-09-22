@@ -4,6 +4,8 @@
 #include <math.h>
 #include <fstream>
 #include <algorithm>
+
+#include "customtiles.h"
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 
 int main(int argc, char** argv) {
@@ -30,6 +32,19 @@ int main(int argc, char** argv) {
 	int prtot[2]={-5,-5};
 	int arr[12][12];
 	int sarr[12][12];
+	int farr[12][12]{
+	0,0,0,0,0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,0,0,0};
 	int kilo=0;
 		int shipid=0;
 	int inp[4][4]{
@@ -269,7 +284,7 @@ if(mod==1){
 	//inp[rand()%4][rand()%3]=1;
 	inp[2][1]=1;
 			}
-			if(modd==8){
+			if(modd==8){//////////////////////////////////////////////////////////////////////////////////////////////////////////
 				int s = tilelen;
 				int div=strr;
 				int ejx=1;
@@ -330,18 +345,12 @@ if(mod==1){
 	code++;
 }
 }
-	int gre=0;//greed burst
-	int ejy=0;//upwards ejecter
-	int ejx=0;//sideways ejector
-	int emp=0;//empty
-	int trr=0;//extra try0
-	int skp=0;//chance to skip
-	int cnt=0;//countdown
-	int xrc=0;//extre rc
-	int crc=0;//change to get
-	int wbw=0;//wave to wave
-	int aut=0;//autopilot
-	int srt=0;//start
+	int buff[20]={
+	0,0,0,0,
+	0,0,0,0,
+	0,0,0,0,
+	0,0,0,0,
+	0,0,0,0};
 	
 	if (site==1){
 		
@@ -351,125 +360,19 @@ if(mod==1){
 		for (int intar=0;intar<4;intar++){
 			iay=0;
 		for (int intak=0;intak<4;intak++){
-			
-			
-			switch(inp[intar][intak]){
-				case 0:
-					
-					arr[iax+0][iay+0]= 1;  arr[iax+0][iay+1]= 1;  arr[iax+0][iay+2]= 1;
-					arr[iax+1][iay+0]= 1;  arr[iax+1][iay+1]= 1;  arr[iax+1][iay+2]= 1;
-					arr[iax+2][iay+0]= 1;  arr[iax+2][iay+1]= 1;  arr[iax+2][iay+2]= 1;
-				break;
-				case 1:
-					ejy++;
-					arr[iax+0][iay+0]= 1;  arr[iax+0][iay+1]= 1;  arr[iax+0][iay+2]= 1;
-					arr[iax+1][iay+0]= 1;  arr[iax+1][iay+1]= 9;  arr[iax+1][iay+2]= 1;
-					arr[iax+2][iay+0]= 1;  arr[iax+2][iay+1]= 0;  arr[iax+2][iay+2]= 0;
-				break;
-				case 2:
-					aut++;
-					arr[iax+0][iay+0]= 1;  arr[iax+0][iay+1]= 0;  arr[iax+0][iay+2]= 0;
-					arr[iax+1][iay+0]= 1;  arr[iax+1][iay+1]= 1;  arr[iax+1][iay+2]= 0;
-					arr[iax+2][iay+0]= 1;  arr[iax+2][iay+1]= 0;  arr[iax+2][iay+2]= 0;
-				break;
-				case 3:
-					trr++;
-					arr[iax+0][iay+0]= 1;  arr[iax+0][iay+1]= 0;  arr[iax+0][iay+2]= 0;
-					arr[iax+1][iay+0]= 1;  arr[iax+1][iay+1]= 0;  arr[iax+1][iay+2]= 1;
-					arr[iax+2][iay+0]= 0;  arr[iax+2][iay+1]= 0;  arr[iax+2][iay+2]= 1;
-				break;
-				case 4:
-					gre++;
-					arr[iax+0][iay+0]= 1;  arr[iax+0][iay+1]= 1;  arr[iax+0][iay+2]= 1;
-					arr[iax+1][iay+0]= 0;  arr[iax+1][iay+1]= 0;  arr[iax+1][iay+2]= 0;
-					arr[iax+2][iay+0]= 1;  arr[iax+2][iay+1]= 0;  arr[iax+2][iay+2]= 1;
-				break;
-				case 5:
-					emp++;
-					arr[iax+0][iay+0]= 0;  arr[iax+0][iay+1]= 0;  arr[iax+0][iay+2]= 0;
-					arr[iax+1][iay+0]= 0;  arr[iax+1][iay+1]= 0;  arr[iax+1][iay+2]= 0;
-					arr[iax+2][iay+0]= 0;  arr[iax+2][iay+1]= 0;  arr[iax+2][iay+2]= 0;
-				break;
-				case 6:
-					wbw++;
-					arr[iax+0][iay+0]= 0;  arr[iax+0][iay+1]= 0;  arr[iax+0][iay+2]= 1;
-					arr[iax+1][iay+0]= 0;  arr[iax+1][iay+1]= 0;  arr[iax+1][iay+2]= 1;
-					arr[iax+2][iay+0]= 0;  arr[iax+2][iay+1]= 0;  arr[iax+2][iay+2]= 1;
-				break;
-				case 7:
-					cnt++;
-					arr[iax+0][iay+0]= 0;  arr[iax+0][iay+1]= 0;  arr[iax+0][iay+2]= 0;
-					arr[iax+1][iay+0]= 0;  arr[iax+1][iay+1]= 0;  arr[iax+1][iay+2]= 0;
-					arr[iax+2][iay+0]= 1;  arr[iax+2][iay+1]= 1;  arr[iax+2][iay+2]= 1;
-				break;
-				case 8:
-					srt++;
-					arr[iax+0][iay+0]= 0;  arr[iax+0][iay+1]= 1;  arr[iax+0][iay+2]= 1;
-					arr[iax+1][iay+0]= 0;  arr[iax+1][iay+1]= 0;  arr[iax+1][iay+2]= 0;
-					arr[iax+2][iay+0]= 1;  arr[iax+2][iay+1]= 1;  arr[iax+2][iay+2]= 0;
-				break;
-				case 9:
-					skp++;
-					arr[iax+0][iay+0]= 1;  arr[iax+0][iay+1]= 1;  arr[iax+0][iay+2]= 0;
-					arr[iax+1][iay+0]= 1;  arr[iax+1][iay+1]= 0;  arr[iax+1][iay+2]= 0;
-					arr[iax+2][iay+0]= 0;  arr[iax+2][iay+1]= 0;  arr[iax+2][iay+2]= 0;
-				break;
-				case 10:
-					xrc++;
-					arr[iax+0][iay+0]= 1;  arr[iax+0][iay+1]= 0;  arr[iax+0][iay+2]= 0;
-					arr[iax+1][iay+0]= 0;  arr[iax+1][iay+1]= 1;  arr[iax+1][iay+2]= 0;
-					arr[iax+2][iay+0]= 0;  arr[iax+2][iay+1]= 0;  arr[iax+2][iay+2]= 1;
-				break;
-				case 11:
-					ejx++;
-					arr[iax+0][iay+0]= 1;  arr[iax+0][iay+1]= 1;  arr[iax+0][iay+2]= 1;
-					arr[iax+1][iay+0]= 0;  arr[iax+1][iay+1]= 9;  arr[iax+1][iay+2]= 0;
-					arr[iax+2][iay+0]= 1;  arr[iax+2][iay+1]= 1;  arr[iax+2][iay+2]= 1;
-				break;
-				case 12:
-					crc++;
-					arr[iax+0][iay+0]= 1;  arr[iax+0][iay+1]= 0;  arr[iax+0][iay+2]= 1;
-					arr[iax+1][iay+0]= 1;  arr[iax+1][iay+1]= 0;  arr[iax+1][iay+2]= 1;
-					arr[iax+2][iay+0]= 0;  arr[iax+2][iay+1]= 0;  arr[iax+2][iay+2]= 0;
-				break;
-				case 13:
-					
-					arr[iax+0][iay+0]= 1;  arr[iax+0][iay+1]= 0;  arr[iax+0][iay+2]= 1;
-					arr[iax+1][iay+0]= 0;  arr[iax+1][iay+1]= 0;  arr[iax+1][iay+2]= 0;
-					arr[iax+2][iay+0]= 1;  arr[iax+2][iay+1]= 0;  arr[iax+2][iay+2]= 0;
-				break;
-				case 14:
-					
-					arr[iax+0][iay+0]= 1;  arr[iax+0][iay+1]= 0;  arr[iax+0][iay+2]= 0;
-					arr[iax+1][iay+0]= 1;  arr[iax+1][iay+1]= 0;  arr[iax+1][iay+2]= 0;
-					arr[iax+2][iay+0]= 1;  arr[iax+2][iay+1]= 0;  arr[iax+2][iay+2]= 0;
-				break;
-				case 15:
-					
-					arr[iax+0][iay+0]= 1;  arr[iax+0][iay+1]= 1;  arr[iax+0][iay+2]= 1;
-					arr[iax+1][iay+0]= 0;  arr[iax+1][iay+1]= 0;  arr[iax+1][iay+2]= 0;
-					arr[iax+2][iay+0]= 0;  arr[iax+2][iay+1]= 0;  arr[iax+2][iay+2]= 0;
-				break;
-				case 16:
-					
-					arr[iax+0][iay+0]= 0;  arr[iax+0][iay+1]= 0;  arr[iax+0][iay+2]= 1;
-					arr[iax+1][iay+0]= 0;  arr[iax+1][iay+1]= 0;  arr[iax+1][iay+2]= 0;
-					arr[iax+2][iay+0]= 1;  arr[iax+2][iay+1]= 0;  arr[iax+2][iay+2]= 0;
-				break;
-				case 17:
-					
-					arr[iax+0][iay+0]= 1;  arr[iax+0][iay+1]= 0;  arr[iax+0][iay+2]= 0;
-					arr[iax+1][iay+0]= 0;  arr[iax+1][iay+1]= 0;  arr[iax+1][iay+2]= 1;
-					arr[iax+2][iay+0]= 1;  arr[iax+2][iay+1]= 0;  arr[iax+2][iay+2]= 0;
-				break;
-				
-				
-			}
-			
+			int inpw=inp[intar][intak];
+		arr[intar*3][intak*3]=cts(inpw,1);
+		arr[intar*3][intak*3+1]=cts(inpw,2);
+		arr[intar*3][intak*3+2]=cts(inpw,3);
 		
-			
-			
-			
+		arr[intar*3+1][intak*3]=cts(inpw,4);
+		arr[intar*3+1][intak*3+1]=cts(inpw,5);
+		arr[intar*3+1][intak*3+2]=cts(inpw,6);
+		
+		arr[intar*3+2][intak*3]=cts(inpw,7);
+		arr[intar*3+2][intak*3+1]=cts(inpw,8);
+		arr[intar*3+2][intak*3+2]=cts(inpw,9);
+		buff[inpw]++;
 		iay+=3;
 	}
 	iax+=3;
@@ -482,7 +385,7 @@ if(mod==1){
 	int dd=0;
 	
 			
-			if(mod==7){
+			if(mod==7 and modd<1){
 			
 				
 				
@@ -576,6 +479,7 @@ if(mod==1){
 	for(int g=0;g<144;g++){
 		int halb=g;
 		sarr[halb/12][halb%12]=arr[halb/12][halb%12];
+	//	farr[halb/12][halb%12]=arr[halb/12][halb%12];
 	}
 //	std::cout<<std::endl<<bst;
 	
@@ -628,7 +532,7 @@ if(mod==1){
 //dir    1up 2right 3 down 4 left	
 		if(inp[3][2]==7){
 			arr[11][9]=1;}
-			if(wbw!=minemp and minemp!=-1){
+			if(buff[6]!=minemp and minemp!=-1){
 			it=maxit;
 		}
 		int doneport=0;
@@ -860,7 +764,7 @@ if(mod==1){
 				}
 				
 			}else{
-			
+		//	std::cout<<"";
 			it=maxit;
 	}
 			
@@ -1121,6 +1025,42 @@ for(int cros=1;cros<11;cros++){
 if(inp[3][3]==6 and arr[11][9]==1){
 arr[11][9]=0;
 }
+x=xt;y=yt;dir=1;
+while(farr[y][x]!=9 and it<maxit){
+	int movedir=dir;
+	switch(dir){
+		case 1:y--;break;
+		case 2:x++;break;
+		case 3:y++;break;
+		case 4:x--;break;
+	}
+	if(sarr[y][x]!=0 and arr[y][x]!=6){
+					arr[y][x]=sarr[y][x];
+				}
+	switch(arr[y][x]){
+		
+		case 0:  break;
+		case 1:;farr[y][x]=9; break;
+		case 2: if(dir!=1){dir=1;farr[y][x]=100+dir+movedir*10;} break;
+		case 3: if(dir!=2){dir=2;farr[y][x]=100+dir+movedir*10;} break;
+		case 4: if(dir!=3){dir=3;farr[y][x]=100+dir+movedir*10;} break;
+		case 5: if(dir!=4){dir=4;farr[y][x]=100+dir+movedir*10;} break;
+		case 6: farr[y][x]=6 ;break;
+		case 8: it=maxit;farr[y][x]=9; break;
+	}
+	if((x==prtin[1] and y==prtin[0])){
+	//	farr[y][x]=11;
+		x=prtot[1];y=prtot[0];dir=prtdir;
+		
+	}
+	
+	
+	
+}
+farr[prtin[0]][prtin[1]]=-11;
+farr[prtot[0]][prtot[1]]=-12;
+
+
 
 
 	double pth4=0;	
@@ -1136,18 +1076,10 @@ arr[11][9]=0;
 	pth4=pth3;
 	}if(it==maxit){
 	pth4-=100;}
-	pth4+=ejy*wem[1];
-	pth4+=aut*wem[2];
-	pth4+=trr*wem[3];
-	pth4+=gre*wem[4];
-	pth4+=emp*wem[5];
-	pth4+=wbw*wem[6];
-	pth4+=cnt*wem[7];
-	pth4+=srt*wem[8];
-	pth4+=skp*wem[9];
-	pth4+=xrc*wem[10];
-	pth4+=ejy*wem[11];
-	pth4+=crc*wem[12];
+	for(int buffc=0;buffc<12;buffc++){
+		pth4+=buff[buffc]*wem[buffc];
+	}
+	
 	if(pth4>254){
 		pth4=0;
 		
@@ -1178,7 +1110,9 @@ arr[11][9]=0;
 				search=arr[ggar][ggak];
 				if(sarr[ggar][ggak]!=0 and search!=6){
 					search=sarr[ggar][ggak];
+					arr[ggar][ggak]=sarr[ggar][ggak];
 				}
+			//	search=farr[ggar][ggak];
 			if(mod==1 or mod==2 or mod==0){
 				switch(inp[ggar/3][ggak/3]){
 					case 0:SetConsoleTextAttribute(hConsole, 8);break;
@@ -1291,25 +1225,113 @@ arr[11][9]=0;
 			bst++;
 		}
 	}else{
+		
+		std::ofstream myfile ("output.txt");
+		if (myfile.is_open())
+  {
+  	
+  	
+  	char ffarr[12][12];
+  	for(int farc=0;farc<12;farc++){
+  		for(int fark=0;fark<12;fark++){
+  		switch(farr[farc][fark]){
+  			case 9:ffarr[farc][fark]='\u0444';break;
+  			case 0:ffarr[farc][fark]='\u0444';break;
+  			
+  			case 2:ffarr[farc][fark]='^';break;
+  			case 3:ffarr[farc][fark]='>';break;
+  			case 4:ffarr[farc][fark]='v';break;
+  			case 5:ffarr[farc][fark]='<';break;
+  			
+  			case 112:ffarr[farc][fark]='\u0444';break;
+  			case 114:ffarr[farc][fark]='\u0444';break;
+  			
+  			case 121:ffarr[farc][fark]='\u0444';break;
+  			case 123:ffarr[farc][fark]='\u0444';break;
+  			
+  			case 132:ffarr[farc][fark]='\u0444';break;
+  			case 134:ffarr[farc][fark]='\u0444';break;
+  			
+  			case 141:ffarr[farc][fark]='\u0444';break;
+  			case 143:ffarr[farc][fark]='w';break;
+  			
+		  }
+	  }
+	  }
+  	for (int filout=0;filout<12;filout++){
+    myfile << 
+	ffarr[filout][0]<<ffarr[filout][1]<<ffarr[filout][2]<<
+	ffarr[filout][3]<<ffarr[filout][4]<<ffarr[filout][5]<<
+	ffarr[filout][6]<<ffarr[filout][7]<<ffarr[filout][8]<<
+	ffarr[filout][9]<<ffarr[filout][10]<<ffarr[filout][11]<<
+	'\n'
+	;
+}
+    myfile << "1";
+    for(int codecc=0;codecc<16;codecc++){
+    	if(inp[codecc/4][codecc%4]<10){
+    	myfile << "0" << inp[codecc/4][codecc%4];	
+		}else{
+		myfile << inp[codecc/4][codecc%4];	
+		}
+	}
+	for(int codecc=-1;codecc<13;codecc++){
+		for(int codek=-1;codek<13;codek++){
+    	if(codecc==-1 or codecc==13 or codek==-1 or codek==13){
+    		if(codecc==12 and codek==10){
+    				myfile << "020";
+			}else{
+    	myfile << "010";}
+		}else{
+			switch(farr[codecc][codek]){
+				case 0: myfile << "010";break;
+				case 1: myfile << "010";break;
+				case 6: myfile << "010";break;
+				case 9: myfile << "010";break;
+				case 11:myfile << "010" ;break;
+				case 12: myfile << "010";break;
+				
+				case 112: myfile << "050"; break;
+				case 114: myfile << "040"; break;
+				
+				case 121: myfile << "041"; break;
+				case 123: myfile << "051"; break;
+				
+				case 132: myfile << "042"; break;
+				case 134: myfile << "052"; break;
+				
+				case 141: myfile << "053"; break;
+				case 143: myfile << "043"; break;
+				default:  myfile << "010";break;
+				
+			}
+		}
+	}
+  
+  }}
+		
+	myfile.close();	
+		
+		
 	std::cout<<std::endl;
 	std::cout<<strr<<std::endl;
 	std::cout<<std::endl;
 	std::cout<<"path lenght"<<pth3-trn<<std::endl;
 	std::cout<<"turns"<<trn<<std::endl;
-	std::cout<<"firerate"<<3.2-(.2*emp)<<std::endl;
+	std::cout<<"firerate"<<3.2-(.2*buff[5])<<std::endl;
 	int bsdmg=((500)*1.3*6*5)*(1+trn/10.0+trn/10.0+.6);
 	std::cout<<"basedmg"<<bsdmg<<std::endl;
-	std::cout<<"dps(not so accurate)"<<(  bsdmg*(pow(1.4,(pth3-12)))    )*(3.2-(.2*emp))*((pow(0.333,emp)))<<std::endl;
+	std::cout<<"dps(not so accurate)"<<(  bsdmg*(pow(1.4,(pth3-12)))    )*(3.2-(.2*buff[5]))*((pow(0.333,buff[5])))<<std::endl;
 	
-	if(emp>0){std::cout<<"damage reduction: "<<(1-pow(0.333,emp))<<std::endl;}
-	if(trr>0){std::cout<<"additional trys: "<<trr<<std::endl;}
-	if(skp>0){std::cout<<"chane to skip a wave: "<<(1-pow(0.9,skp))<<std::endl;}
-	if(cnt>0){std::cout<<"wave countdown lasts longer: "<<(1+3*cnt)<<std::endl;}
-	if(xrc>0){std::cout<<"more rc: "<<(1-pow(0.995,wbw))<<std::endl;}
-	if(crc>0){std::cout<<"chance to get 1 rc per wave: "<<(1+3*crc)<<std::endl;}
-	if(wbw>0){std::cout<<"increased speed between waves: "<<5*(pow(0.8,wbw))<<std::endl;}
-	if(aut>0){std::cout<<"has autopilot: "<<std::endl;}
-	if(srt>0){std::cout<<"skip last distance by: "<<(1-pow(0.85,srt))<<std::endl;}
+	if(buff[5]>0){std::cout<<"damage reduction: "<<(1-pow(0.333,buff[5]))<<std::endl;}
+	if(buff[3]>0){std::cout<<"additional trys: "<<buff[3]<<std::endl;}
+	if(buff[9]>0){std::cout<<"chane to skip a wave: "<<(1-pow(0.9,buff[9]))<<std::endl;}
+	if(buff[7]){std::cout<<"wave countdown lasts longer: "<<(1+3*buff[7])<<std::endl;}
+	if(buff[10]>0){std::cout<<"more rc: "<<(1-pow(0.995,buff[10]))<<std::endl;}
+	if(buff[12]>0){std::cout<<"chance to get 1 rc per wave: "<<(1+3*buff[12])<<std::endl;}
+	if(buff[6]>0){std::cout<<"increased speed between waves: "<<5*(pow(0.8,buff[6]))<<std::endl;}
+	if(buff[2]>0){std::cout<<"has autopilot: "<<std::endl;}
+	if(buff[8]>0){std::cout<<"skip last distance by: "<<(1-pow(0.85,buff[8]))<<std::endl;}
 	if(brtf>10){std::cout<<std::endl<<best<<"-"<<bst;}
 	
 }
