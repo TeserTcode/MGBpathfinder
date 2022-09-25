@@ -2,21 +2,24 @@
 #1-3  3 should be goodfor custom 2 is better on smaller ships
 1=1
 #telorance for shwoing the best 1=show same performance 0=dont show anything until something better
-2=20
+2=5
 #extra quality for tile bruteforce (makis it longer N times)
 3=-1
 #number of empty tiles   set it to -1
-4=06 07 05
-#usable tiles in tile bruteforce ex    05 06 07
+4=05 06 07
+#usable tiles in tile bruteforce ex   
 5=500
 #retry for fail (not matter much)
-6=05-  306  .1
+6=05 -306  .1
 #weights of tiles ex.
-7=50000
+7=5000
 #maximum iteration for pathfinding (not matter much)
-8=30
+8=100
 #randomly turns wrongly
 9=1
 #disable portals (1=portal 0=no portal)
+10=1
+#create output(1=yes 0=no)
+#&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&6
 
 

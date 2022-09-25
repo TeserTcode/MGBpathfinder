@@ -20,8 +20,11 @@ int main(int argc, char** argv) {
 	int maxit=50000;//maximum iteration for pathfinding (not matter much)
 	int rndrt=30;//randomly turns wrongly
 	int isprt=1;//use prtals
+	bool isoutput=1;
 	
 	
+	
+	 int code=0;
 	int tilelen=0;
 	int ptile[20]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 	int brtf=1;
@@ -79,6 +82,7 @@ int main(int argc, char** argv) {
             	if(name=="7"){maxit=num;}
             	if(name=="8"){rndrt=num;}
             	if(name=="9"){isprt=num;}
+            	if(name=="10"){isoutput=num;}
             	if(name=="4"){
             		
             		int lngng=0;
@@ -86,7 +90,7 @@ int main(int argc, char** argv) {
             	if(line.find("02")!=line.npos){ptile[lngng]=2;lngng++;}	
             	if(line.find("03")!=line.npos){ptile[lngng]=3;lngng++;}	
             	if(line.find("04")!=line.npos){ptile[lngng]=4;lngng++;}	
-				if(line.find("05")!=line.npos){ptile[lngng]=5;lngng++;}
+					if(line.find("05")!=line.npos){ptile[lngng]=5;lngng++;}		
 				if(line.find("06")!=line.npos){ptile[lngng]=6;lngng++;}
 				if(line.find("07")!=line.npos){ptile[lngng]=7;lngng++;}		
 				if(line.find("08")!=line.npos){ptile[lngng]=8;lngng++;}	
@@ -96,7 +100,9 @@ int main(int argc, char** argv) {
 				if(line.find("12")!=line.npos){ptile[lngng]=12;lngng++;}	
 				if(line.find("13")!=line.npos){ptile[lngng]=13;lngng++;}	
 				if(line.find("14")!=line.npos){ptile[lngng]=14;lngng++;}	
-				if(line.find("15")!=line.npos){ptile[lngng]=15;lngng++;}			
+				if(line.find("15")!=line.npos){ptile[lngng]=15;lngng++;}
+				
+				
 				tilelen=lngng;
 			}
 				
@@ -126,7 +132,7 @@ int main(int argc, char** argv) {
     int tile[tilelen];
 				for(int tileset=0;tileset<tilelen;tileset++){
 					tile[tileset]=ptile[tileset];
-				 std::cout << tileset << "->" << tile[tileset] << '\n';
+				 std::cout  << "->" << tile[tileset] << '\n';
 }for(int tileset=0;tileset<12;tileset++){
 	if(wem[tileset]!=0){
 	std::cout << tileset+1 << " weighs " << wem[tileset] << '\n';
@@ -268,7 +274,7 @@ case 9:
 				std::cin>>shipi;
 				shipid=shipi;
 	}
- int code=0;
+
 int best=0;
 
 	for(int bst=0;bst<brtf;bst++){
@@ -285,32 +291,31 @@ if(mod==1){
 	inp[2][1]=1;
 			}
 			if(modd==8){//////////////////////////////////////////////////////////////////////////////////////////////////////////
+		//	std::cout<<"eyey";
 				int s = tilelen;
 				int div=strr;
 				int ejx=1;
 				int ejy=2;
+				//std::cout<<code;
 				if(tile[s-1]!=1){
 	ejx=(code/div)%2; div*=2;
-	ejy=(code/div)%4; div*=4;}
-				
+	ejy=(code/div)%4; div*=4;
+}
+				//srand(code);
 			//	inp[rand()%4][rand()%3]=1;
 	inp[0][0]=tile[(code/div)%s];div*=s;inp[0][1]=tile[(code/div)%s];div*=s;inp[0][2]=tile[(code/div)%s];div*=s;inp[0][3]=6;
 	inp[1][0]=tile[(code/div)%s];div*=s;inp[1][1]=tile[(code/div)%s];div*=s;inp[1][2]=tile[(code/div)%s];div*=s;inp[1][3]=6;	
 	inp[2][0]=tile[(code/div)%s];div*=s;inp[2][1]=tile[(code/div)%s];div*=s;inp[2][2]=tile[(code/div)%s];div*=s;inp[2][3]=6;
 	inp[3][0]=tile[(code/div)%s];div*=s;inp[3][1]=tile[(code/div)%s];div*=s;inp[3][2]=tile[(code/div)%s];inp[3][3]=6;
 	if(tile[s-1]!=1){
-
+//std::cout<<inp[2][3];
 	inp[3][2]=inp[ejy][ejx];
 	inp[ejy][ejx]=1;
-
-    //inp[3][2]=inp[ejy][ejx];
-//		inp[ejy][ejx]=1;
 }
-
-	code++;
+code++;
+}
 	
 	
-			}
 			if(modd==7){
 				inp[0][0]=1+rand()%12; inp[0][1]=1+rand()%12;  inp[0][2]=1+rand()%12;inp[0][3]=1+rand()%12;
 	inp[1][0]=1+rand()%12;inp[1][1]=1+rand()%12;  inp[1][2]=rand()%12; inp[1][3]=1+rand()%12;	
@@ -340,10 +345,7 @@ if(mod==1){
 
     //inp[3][2]=inp[ejy][ejx];
 //		inp[ejy][ejx]=1;
-}
-
-	code++;
-}
+}code++;}
 }
 	int buff[20]={
 	0,0,0,0,
@@ -594,7 +596,7 @@ if(mod==1){
 			}
 		nofront =   0 ;
 			if(modd!=9 and modd!=8  and (rnd>bst or (mod==4 and nofront ))or(mod==7 and rnd*2>bst)or
-			 (modd==8 and strr!=1 and 1+rand()%strr>strr/2 and bst%strr!=0)){	
+			 (modd==8 and strr!=1 and 1+rand()%strr>strr/2 and bst%strr>1)){	
 			switch (raytr){
 			case 3:switch (dir){case 1:
 			    	if(x>2 and arr[y][x-1]==0 and arr[y][x-2]==0 and arr[y][x-3]==0){dir=4;trn++;}
@@ -778,8 +780,8 @@ if(mod==1){
 		arr[y][x]=0;}
 				x=dx;
 			y=dy;
-			pth--;
-		//	trn++;
+		
+		
 			
 					switch(ogdir){
 					case 1:
@@ -1028,6 +1030,9 @@ arr[11][9]=0;
 x=xt;y=yt;dir=1;
 while(farr[y][x]!=9 and it<maxit){
 	int movedir=dir;
+	if(farr[y][x]==0){
+		farr[y][x]=dir+1;
+}
 	switch(dir){
 		case 1:y--;break;
 		case 2:x++;break;
@@ -1061,7 +1066,10 @@ farr[prtin[0]][prtin[1]]=-11;
 farr[prtot[0]][prtot[1]]=-12;
 
 
-
+//std::cout<<mod;
+if(mod==7 and modd==8){
+	mod=1;
+}
 
 	double pth4=0;	
 	int pth3=0;
@@ -1197,7 +1205,11 @@ farr[prtot[0]][prtot[1]]=-12;
 					SetConsoleTextAttribute(hConsole, 9);		
 					std::cout<<"O";//out
 				break;
-				
+				default:
+					std::cout<<" ";
+					empt++;
+					break;
+					
 			}
 			SetConsoleTextAttribute(hConsole, 15);}
 	std::cout<<std::endl;
@@ -1212,7 +1224,7 @@ farr[prtot[0]][prtot[1]]=-12;
 	 wbw=0;//wave to wave
 	 aut=0;//autopilot
 	 srt=0;//start*/
-	 if(mod=7){
+	 if(mod==7){
 	 	pth3--;
 	 }
 	if(it==maxit){
@@ -1225,40 +1237,80 @@ farr[prtot[0]][prtot[1]]=-12;
 			bst++;
 		}
 	}else{
-		
+		if(isoutput){
 		std::ofstream myfile ("output.txt");
 		if (myfile.is_open())
   {
   	
   	
   	char ffarr[12][12];
-  	for(int farc=0;farc<12;farc++){
-  		for(int fark=0;fark<12;fark++){
-  		switch(farr[farc][fark]){
-  			case 9:ffarr[farc][fark]='\u0444';break;
-  			case 0:ffarr[farc][fark]='\u0444';break;
-  			
-  			case 2:ffarr[farc][fark]='^';break;
-  			case 3:ffarr[farc][fark]='>';break;
-  			case 4:ffarr[farc][fark]='v';break;
-  			case 5:ffarr[farc][fark]='<';break;
-  			
-  			case 112:ffarr[farc][fark]='\u0444';break;
-  			case 114:ffarr[farc][fark]='\u0444';break;
-  			
-  			case 121:ffarr[farc][fark]='\u0444';break;
-  			case 123:ffarr[farc][fark]='\u0444';break;
-  			
-  			case 132:ffarr[farc][fark]='\u0444';break;
-  			case 134:ffarr[farc][fark]='\u0444';break;
-  			
-  			case 141:ffarr[farc][fark]='\u0444';break;
-  			case 143:ffarr[farc][fark]='w';break;
-  			
-		  }
-	  }
-	  }
-  	for (int filout=0;filout<12;filout++){
+  	for(int i=0;i<12;i++){
+	for(int j=0;j<12;j++){
+	 switch(farr[i][j]){
+    	
+				case 0: ffarr[i][j] = ' ';break;
+				case 1: ffarr[i][j] = '#';break;
+				
+				case 2: ffarr[i][j] = '|';break;
+				case 3: ffarr[i][j] = '-';break;
+				case 4: ffarr[i][j] = '|';break;
+				case 5: ffarr[i][j] = '-';break;
+				
+				
+				case 6: ffarr[i][j] = 'X';break;
+				case 9: ffarr[i][j] = 'Q';break;
+				case 11:ffarr[i][j] = 'O' ;break;
+				case 12: ffarr[i][j] = 'O';break;
+				
+				case 112: ffarr[i][j] = '>'; break;
+				case 114: ffarr[i][j] = '<'; break;
+				
+				case 121: ffarr[i][j] = '^'; break;
+				case 123: ffarr[i][j] = 'v'; break;
+				
+				case 132: ffarr[i][j] = '>'; break;
+				case 134: ffarr[i][j] = '<'; break;
+				
+				case 141: ffarr[i][j] = '^'; break;
+				case 143: ffarr[i][j] = 'v'; break;
+				
+				
+				default: ffarr[i][j] = '0'; break;
+	
+	}if(sarr[i][j]==1){
+		ffarr[i][j] = '\u0219';
+	}if(sarr[i][j]==9){
+		ffarr[i][j] = '@';
+	}
+	}}
+         
+   
+  	
+	  
+	  
+
+myfile<<'\n';
+	for(int i=0;i<4;i++){
+	for(int j=0;j<4;j++){
+		switch(inp[i][j]){
+			case 0:myfile<<'#';break;
+			case 1:myfile<<'@';break;
+			case 2:myfile<<'K';break;
+			case 3:myfile<<'S';break;
+			case 4:myfile<<'+';break;
+			case 5:myfile<<' ';break;
+			case 6:myfile<<'I';break;
+			case 7:myfile<<'_';break;
+			case 8:myfile<<'N';break;
+			case 9:myfile<<'^';break;
+			case 10:myfile<<'/';break;
+			case 11:myfile<<'=';break;
+			case 12:myfile<<'"';break;
+			
+		}}myfile<<'\n';
+	}	myfile<<'\n';
+	
+	for (int filout=0;filout<12;filout++){
     myfile << 
 	ffarr[filout][0]<<ffarr[filout][1]<<ffarr[filout][2]<<
 	ffarr[filout][3]<<ffarr[filout][4]<<ffarr[filout][5]<<
@@ -1267,6 +1319,11 @@ farr[prtot[0]][prtot[1]]=-12;
 	'\n'
 	;
 }
+	
+	myfile<<'\n';
+	myfile<<'\n';
+myfile<<'\n';
+
     myfile << "1";
     for(int codecc=0;codecc<16;codecc++){
     	if(inp[codecc/4][codecc%4]<10){
@@ -1311,7 +1368,7 @@ farr[prtot[0]][prtot[1]]=-12;
   }}
 		
 	myfile.close();	
-		
+	}}
 		
 	std::cout<<std::endl;
 	std::cout<<strr<<std::endl;
@@ -1332,11 +1389,11 @@ farr[prtot[0]][prtot[1]]=-12;
 	if(buff[6]>0){std::cout<<"increased speed between waves: "<<5*(pow(0.8,buff[6]))<<std::endl;}
 	if(buff[2]>0){std::cout<<"has autopilot: "<<std::endl;}
 	if(buff[8]>0){std::cout<<"skip last distance by: "<<(1-pow(0.85,buff[8]))<<std::endl;}
-	if(brtf>10){std::cout<<std::endl<<best<<"-"<<bst;}
+	if(brtf>10){std::cout<<std::endl<<best<<"-"<<bst<<"@"<<code;}
 	
 }
 }
-}
+
 
 	system("pause");
 	return 0;
