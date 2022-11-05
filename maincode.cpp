@@ -6,9 +6,13 @@
 #include <algorithm>
 
 #include "customtiles.h"
+#include "drawer.h"
+#include "fileoutput.h"
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 
 int main(int argc, char** argv) {
+	while(true){
+	
 	//settings
 	int raytr=3;//1-3  3 should be good
 	int telo=5;//telorance for shwoing the best 1=show same performance 0=dont show anything until something better
@@ -76,12 +80,12 @@ int main(int argc, char** argv) {
             	if(name=="1"){telo=num;}
             	if(name=="2"){strr=num;}
             	if(name=="3"){minemp=num;}
+            		if(name=="9"){isprt=num;}
             	//case 4: raytr=value; break;
             	if(name=="5"){klma=num;}
             	//case 6: raytr=value; break;
             	if(name=="7"){maxit=num;}
             	if(name=="8"){rndrt=num;}
-            	if(name=="9"){isprt=num;}
             	if(name=="10"){isoutput=num;}
             	if(name=="4"){
             		
@@ -106,13 +110,13 @@ int main(int argc, char** argv) {
 				tilelen=lngng;
 			}
 				
-				if(name=="6")
+				if(name=="y")
             	//std::atoi((line.substr(line.find("01")+2,4)).c_str())
             		
             		if(line.find("01")!=line.npos){wem[0]=std::atof((line.substr(line.find("01")+2,4)).c_str());}
 					
 					if(line.find("05")!=line.npos){wem[4]=std::atof((line.substr(line.find("05")+2,4)).c_str());}
-					if(line.find("06")!=line.npos){wem[5]=std::atof((line.substr(line.find("06")+2,4)).c_str());}
+				//	if(line.find("06")!=line.npos){wem[5]=std::atof((line.substr(line.find("06")+2,4)).c_str());}
 					if(line.find("07")!=line.npos){wem[6]=std::atof((line.substr(line.find("07")+2,4)).c_str());}	
             		
             		
@@ -141,7 +145,7 @@ int main(int argc, char** argv) {
     
 	std::cout << '\n';
 	
-	
+		int gfgg=0;
 	
 	
 	std::cout<<std::endl<<"choose mod 0-custom 1-named cutsom  4-lite bruteforce 7-classic ships " ;
@@ -242,15 +246,15 @@ if(mod==6){
 		std::cout<<"seed this will be used for tile brutefroce(6)";
 	int gfgf;
 	std::cin>>gfgf;
-	srand(gfgf);
+//	srand(gfgf);
 	
 	break;
 		case 7:
-			brtf=5000000;
+			brtf=2147483645;
 			std::cout<<"seed this will be used for tile brutefroce dont use 123";
-	int gfgg;
+
 	std::cin>>gfgg;
-	srand(gfgg);
+	srand(gfgg+code);
 	break;
 	case 8:
 		
@@ -278,6 +282,9 @@ case 9:
 int best=0;
 
 	for(int bst=0;bst<brtf;bst++){
+		if(GetKeyState('Q') & 0x8000){
+			break;
+		}
 	int sest=0;
 if(mod==1){
 
@@ -290,6 +297,11 @@ if(mod==1){
 	//inp[rand()%4][rand()%3]=1;
 	inp[2][1]=1;
 			}
+			
+			
+			
+			
+			
 			if(modd==8){//////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//	std::cout<<"eyey";
 				int s = tilelen;
@@ -299,7 +311,7 @@ if(mod==1){
 				//std::cout<<code;
 				if(tile[s-1]!=1){
 	ejx=(code/div)%2; div*=2;
-	ejy=(code/div)%4; div*=4;
+	ejy=(code/div)%3; div*=3;
 }
 				//srand(code);
 			//	inp[rand()%4][rand()%3]=1;
@@ -317,13 +329,17 @@ code++;
 	
 	
 			if(modd==7){
-				inp[0][0]=1+rand()%12; inp[0][1]=1+rand()%12;  inp[0][2]=1+rand()%12;inp[0][3]=1+rand()%12;
-	inp[1][0]=1+rand()%12;inp[1][1]=1+rand()%12;  inp[1][2]=rand()%12; inp[1][3]=1+rand()%12;	
-	inp[2][0]=1+rand()%12; inp[2][1]=1+rand()%12; inp[2][2]=rand()%12; inp[2][3]=1+rand()%12;
-	inp[3][0]=1+rand()%12; inp[3][1]=1+rand()%12;  inp[3][2]=rand()%12;inp[3][3]=6;	
-	
+				int t=7;
+	inp[0][0]=1+rand()%t; inp[0][1]=1+rand()%t;  inp[0][2]=1+rand()%t; inp[0][3]=1+rand()%t;
+	inp[1][0]=1+rand()%t; inp[1][1]=1+rand()%t;  inp[1][2]=1+rand()%t; inp[1][3]=1+rand()%t;	
+	inp[2][0]=1+rand()%t; inp[2][1]=1+rand()%t;  inp[2][2]=1+rand()%t; inp[2][3]=1+rand()%t;
+	inp[3][0]=1+rand()%t; inp[3][1]=1+rand()%t;  inp[3][2]=1+rand()%t; inp[3][3]=6;	
+	srand(gfgg+code);
 	inp[rand()%4][rand()%3]=1;
+	code+=+1;
 			}
+			
+			
 			if(modd==9){
 				int s = tilelen;
 				int div=strr;
@@ -530,7 +546,7 @@ code++;
 	arr[prtin[0]][prtin[1]]=11;
 	
 	arr[prtot[0]][prtot[1]]=12;	*/	
-	int isprt=0;
+//	int isprt=1;
 //dir    1up 2right 3 down 4 left	
 		if(inp[3][2]==7){
 			arr[11][9]=1;}
@@ -540,6 +556,10 @@ code++;
 		int doneport=0;
 		bool strtcrs=0;
 	while(arr[y][x]!=9 and it < maxit){
+		if(GetKeyState(VK_SHIFT) & 0x8000)
+{
+    break;
+}
 		it++;
 		
 		//	std::cout<<x<<","<<y<<"'"<<dir<<","<<ogdir<<"w"<<arr[y][x];
@@ -670,20 +690,21 @@ code++;
 			(dir==3 and arr[y+1][x]==0)and
 			(dir==4 and arr[y][x-1]==0)
 			){
-			
+		
 				
 			switch(dir){
 					case 1:
 						sarr[y][x]=6;
+						arr[y][x]=6;
 						y--;break;
 					case 2:
-						sarr[y][x]=6;
+						sarr[y][x]=6;arr[y][x]=6;
 						x++;break;
 					case 3:
-						sarr[y][x]=6;
+						sarr[y][x]=6;arr[y][x]=6;
 						y++;break;
 					case 4:
-						sarr[y][x]=6;
+						sarr[y][x]=6;arr[y][x]=6;
 						x--;break;
 				}
 					//arr[y][x]=0;
@@ -1027,12 +1048,29 @@ for(int cros=1;cros<11;cros++){
 if(inp[3][3]==6 and arr[11][9]==1){
 arr[11][9]=0;
 }
-x=xt;y=yt;dir=1;
+
+x=10;y=11;dir=1;it=0;
+int ptrn=0;
+for(int hj=0;hj<12;hj++){for(int hjs=0;hjs<12;hjs++){
+	farr[hj][hjs]=sarr[hj][hjs];
+	if(
+	 (arr[hj][hjs-1]==3 and (arr[hj-1][hjs]==4 or arr[hj+1][hjs]==2)) or
+	(arr[hj][hjs+1]==5 and (arr[hj-1][hjs]==4 or arr[hj+1][hjs]==2))
+	){
+		arr[hj][hjs]=6 ;farr[hj][hjs]=6 ;
+	}
+}
+}
 while(farr[y][x]!=9 and it<maxit){
+	it++;
 	int movedir=dir;
+	if(movedir!=farr[y][x]-1){
+		ptrn++;
+	}
 	if(farr[y][x]==0){
 		farr[y][x]=dir+1;
 }
+
 	switch(dir){
 		case 1:y--;break;
 		case 2:x++;break;
@@ -1042,10 +1080,14 @@ while(farr[y][x]!=9 and it<maxit){
 	if(sarr[y][x]!=0 and arr[y][x]!=6){
 					arr[y][x]=sarr[y][x];
 				}
+	if(sarr[x][y]==6){
+		farr[x][y]=6;
+		arr[x][y]=6;
+	}
 	switch(arr[y][x]){
 		
 		case 0:  break;
-		case 1:;farr[y][x]=9; break;
+		case 1: it=maxit;farr[y][x]=9; break;
 		case 2: if(dir!=1){dir=1;farr[y][x]=100+dir+movedir*10;} break;
 		case 3: if(dir!=2){dir=2;farr[y][x]=100+dir+movedir*10;} break;
 		case 4: if(dir!=3){dir=3;farr[y][x]=100+dir+movedir*10;} break;
@@ -1053,18 +1095,23 @@ while(farr[y][x]!=9 and it<maxit){
 		case 6: farr[y][x]=6 ;break;
 		case 8: it=maxit;farr[y][x]=9; break;
 	}
-	if((x==prtin[1] and y==prtin[0])){
+	
+	if((x==prtin[1] and y==prtin[0] and prtin[0]>-1)){
 	//	farr[y][x]=11;
 		x=prtot[1];y=prtot[0];dir=prtdir;
 		
 	}
+	if(x<0 or x>11 or y<0 or y>11){
+		it=maxit;
+	}
 	
 	
-	
-}
-farr[prtin[0]][prtin[1]]=-11;
-farr[prtot[0]][prtot[1]]=-12;
+}//std::cout<<ptrn;
+if(prtin[0]>-1 and prtin[1]<13){
 
+//farr[prtin[0]][prtin[1]]=11;
+//farr[prtot[0]][prtot[1]]=12;
+}
 
 //std::cout<<mod;
 if(mod==7 and modd==8){
@@ -1081,27 +1128,29 @@ if(mod==7 and modd==8){
 			}
 			
 		}
-	pth4=pth3;
+	pth4=pth3-trn;
 	}if(it==maxit){
 	pth4-=100;}
+		wem[6]=0;	wem[6]=0;
+	
 	for(int buffc=0;buffc<12;buffc++){
-		pth4+=buff[buffc]*wem[buffc];
+		pth4+=buff[buffc]*wem[buffc-1];
 	}
 	
 	if(pth4>254){
 		pth4=0;
 		
 	}
-	pth4-=trn;
+	//pth4-=ptrn;//std::cout<<trn;
 	if(pth4>best-telo or brtf<10){
-		if(pth4>best){
+		if(pth4>best){//////////////////////////////////////////////
 	best=pth4;}
 	int pth2=0;
 	int empt=0;
 	
 	
-	
-	
+
+
 	std::cout<<std::endl;
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	if(doneport==1){
@@ -1121,96 +1170,10 @@ if(mod==7 and modd==8){
 					arr[ggar][ggak]=sarr[ggar][ggak];
 				}
 			//	search=farr[ggar][ggak];
-			if(mod==1 or mod==2 or mod==0){
-				switch(inp[ggar/3][ggak/3]){
-					case 0:SetConsoleTextAttribute(hConsole, 8);break;
-					case 1:SetConsoleTextAttribute(hConsole, 12);break;
-					case 2:SetConsoleTextAttribute(hConsole, 2);break;
-					case 3:SetConsoleTextAttribute(hConsole, 9);break;
-					case 4:SetConsoleTextAttribute(hConsole, 4);break;
-					case 5:SetConsoleTextAttribute(hConsole, 7);break;
-					case 6:SetConsoleTextAttribute(hConsole, 11);break;
-					case 7:SetConsoleTextAttribute(hConsole, 13);break;
-					case 8:SetConsoleTextAttribute(hConsole, 10);break;
-					case 9:SetConsoleTextAttribute(hConsole, 5);break;
-					case 10:SetConsoleTextAttribute(hConsole, 4);break;
-					case 11:SetConsoleTextAttribute(hConsole, 12);break;
-					case 12:SetConsoleTextAttribute(hConsole, 14);break;
-					case 13:SetConsoleTextAttribute(hConsole, 3);break;
-					case 14:SetConsoleTextAttribute(hConsole, 1);break;
-					case 15:SetConsoleTextAttribute(hConsole, 6);break;
-					case 16:SetConsoleTextAttribute(hConsole, 7);break;
-					case 17:SetConsoleTextAttribute(hConsole, 10);break;
-					case 18:SetConsoleTextAttribute(hConsole, 11);break;
-					case 19:SetConsoleTextAttribute(hConsole, 14);break;
-					case 20:SetConsoleTextAttribute(hConsole, 13);break;
-					
-					
-					
-					
-				}
-			}
+			SetConsoleTextAttribute(hConsole,color(mod,ggar,ggak,inp,search));
 			
-			switch(search){
-				case 0:
-				
-					std::cout<<" ";
-					empt++;
-				break;
-				case 1:
-						
-					std::cout<<"#";
-				break;
-				case 2:
-					SetConsoleTextAttribute(hConsole, 15);
-					std::cout<<"^";
-					pth2++;
-					
-				break;
-				case 3:
-					SetConsoleTextAttribute(hConsole, 15);
-					std::cout<<">";
-					pth2++;
-				break;
-				case 4:
-					SetConsoleTextAttribute(hConsole, 15);
-					std::cout<<"V";
-					pth2++;
-				break;
-				case 5:
-				SetConsoleTextAttribute(hConsole, 15);
-					std::cout<<"<";
-					pth2++;
-				break;
-				case 6:
-					SetConsoleTextAttribute(hConsole, 15);
-					std::cout<<"X";
-				break;
-				case 8:
-						
-					std::cout<<" ";
-				break;
-				case 9:
-					
-					 
-					
-					
-					std::cout<<"@";
-				break;
-				case 11:
-					SetConsoleTextAttribute(hConsole, 14);	
-					std::cout<<"O";
-				break;
-				case 12:
-					SetConsoleTextAttribute(hConsole, 9);		
-					std::cout<<"O";//out
-				break;
-				default:
-					std::cout<<" ";
-					empt++;
-					break;
-					
-			}
+			
+			draw(search,empt,pth2,farr[ggar][ggak]);
 			SetConsoleTextAttribute(hConsole, 15);}
 	std::cout<<std::endl;
 	}//SetConsoleTextAttribute(hConsole, 0);
@@ -1227,6 +1190,9 @@ if(mod==7 and modd==8){
 	 if(mod==7){
 	 	pth3--;
 	 }
+	 if(pth3-trn<0){
+	 	it=maxit;
+	 }
 	if(it==maxit){
 		std::cout<<"there no path thogh"<<std::endl;
 		std::cout<<std::endl<<best<<"-"<<bst;
@@ -1238,145 +1204,16 @@ if(mod==7 and modd==8){
 		}
 	}else{
 		if(isoutput){
-		std::ofstream myfile ("output.txt");
-		if (myfile.is_open())
-  {
-  	
-  	
-  	char ffarr[12][12];
-  	for(int i=0;i<12;i++){
-	for(int j=0;j<12;j++){
-	 switch(farr[i][j]){
-    	
-				case 0: ffarr[i][j] = ' ';break;
-				case 1: ffarr[i][j] = '#';break;
-				
-				case 2: ffarr[i][j] = '|';break;
-				case 3: ffarr[i][j] = '-';break;
-				case 4: ffarr[i][j] = '|';break;
-				case 5: ffarr[i][j] = '-';break;
-				
-				
-				case 6: ffarr[i][j] = 'X';break;
-				case 9: ffarr[i][j] = 'Q';break;
-				case 11:ffarr[i][j] = 'O' ;break;
-				case 12: ffarr[i][j] = 'O';break;
-				
-				case 112: ffarr[i][j] = '>'; break;
-				case 114: ffarr[i][j] = '<'; break;
-				
-				case 121: ffarr[i][j] = '^'; break;
-				case 123: ffarr[i][j] = 'v'; break;
-				
-				case 132: ffarr[i][j] = '>'; break;
-				case 134: ffarr[i][j] = '<'; break;
-				
-				case 141: ffarr[i][j] = '^'; break;
-				case 143: ffarr[i][j] = 'v'; break;
-				
-				
-				default: ffarr[i][j] = '0'; break;
-	
-	}if(sarr[i][j]==1){
-		ffarr[i][j] = '\u0219';
-	}if(sarr[i][j]==9){
-		ffarr[i][j] = '@';
-	}
+		outfileput(farr,inp,sarr);
 	}}
-         
-   
-  	
-	  
-	  
-
-myfile<<'\n';
-	for(int i=0;i<4;i++){
-	for(int j=0;j<4;j++){
-		switch(inp[i][j]){
-			case 0:myfile<<'#';break;
-			case 1:myfile<<'@';break;
-			case 2:myfile<<'K';break;
-			case 3:myfile<<'S';break;
-			case 4:myfile<<'+';break;
-			case 5:myfile<<' ';break;
-			case 6:myfile<<'I';break;
-			case 7:myfile<<'_';break;
-			case 8:myfile<<'N';break;
-			case 9:myfile<<'^';break;
-			case 10:myfile<<'/';break;
-			case 11:myfile<<'=';break;
-			case 12:myfile<<'"';break;
-			
-		}}myfile<<'\n';
-	}	myfile<<'\n';
-	
-	for (int filout=0;filout<12;filout++){
-    myfile << 
-	ffarr[filout][0]<<ffarr[filout][1]<<ffarr[filout][2]<<
-	ffarr[filout][3]<<ffarr[filout][4]<<ffarr[filout][5]<<
-	ffarr[filout][6]<<ffarr[filout][7]<<ffarr[filout][8]<<
-	ffarr[filout][9]<<ffarr[filout][10]<<ffarr[filout][11]<<
-	'\n'
-	;
-}
-	
-	myfile<<'\n';
-	myfile<<'\n';
-myfile<<'\n';
-
-    myfile << "1";
-    for(int codecc=0;codecc<16;codecc++){
-    	if(inp[codecc/4][codecc%4]<10){
-    	myfile << "0" << inp[codecc/4][codecc%4];	
-		}else{
-		myfile << inp[codecc/4][codecc%4];	
-		}
-	}
-	for(int codecc=-1;codecc<13;codecc++){
-		for(int codek=-1;codek<13;codek++){
-    	if(codecc==-1 or codecc==13 or codek==-1 or codek==13){
-    		if(codecc==12 and codek==10){
-    				myfile << "020";
-			}else{
-    	myfile << "010";}
-		}else{
-			switch(farr[codecc][codek]){
-				case 0: myfile << "010";break;
-				case 1: myfile << "010";break;
-				case 6: myfile << "010";break;
-				case 9: myfile << "010";break;
-				case 11:myfile << "010" ;break;
-				case 12: myfile << "010";break;
-				
-				case 112: myfile << "050"; break;
-				case 114: myfile << "040"; break;
-				
-				case 121: myfile << "041"; break;
-				case 123: myfile << "051"; break;
-				
-				case 132: myfile << "042"; break;
-				case 134: myfile << "052"; break;
-				
-				case 141: myfile << "053"; break;
-				case 143: myfile << "043"; break;
-				default:  myfile << "010";break;
-				
-			}
-		}
-	}
-  
-  }}
-		
-	myfile.close();	
-	}}
-		
+		ptrn=trn;//
 	std::cout<<std::endl;
-	std::cout<<strr<<std::endl;
+//	std::cout<<strr<<std::endl;
 	std::cout<<std::endl;
 	std::cout<<"path lenght"<<pth3-trn<<std::endl;
 	std::cout<<"turns"<<trn<<std::endl;
 	std::cout<<"firerate"<<3.2-(.2*buff[5])<<std::endl;
-	int bsdmg=((500)*1.3*6*5)*(1+trn/10.0+trn/10.0+.6);
+	int bsdmg=((500)*1.3*6*5)*(1+ptrn/10.0+ptrn/10.0+.6);
 	std::cout<<"basedmg"<<bsdmg<<std::endl;
 	std::cout<<"dps(not so accurate)"<<(  bsdmg*(pow(1.4,(pth3-12)))    )*(3.2-(.2*buff[5]))*((pow(0.333,buff[5])))<<std::endl;
 	
@@ -1389,12 +1226,12 @@ myfile<<'\n';
 	if(buff[6]>0){std::cout<<"increased speed between waves: "<<5*(pow(0.8,buff[6]))<<std::endl;}
 	if(buff[2]>0){std::cout<<"has autopilot: "<<std::endl;}
 	if(buff[8]>0){std::cout<<"skip last distance by: "<<(1-pow(0.85,buff[8]))<<std::endl;}
-	if(brtf>10){std::cout<<std::endl<<best<<"-"<<bst<<"@"<<code;}
+	if(brtf>10){std::cout<<std::endl<<best<<"@"<<bst<<"-"<<code;}
+	//std::cout<<std::endl<<wem[5];
 	
 }
 }
 
-
-	system("pause");
+	system("pause");}
 	return 0;
 }
