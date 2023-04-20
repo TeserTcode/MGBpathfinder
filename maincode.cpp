@@ -5,12 +5,55 @@
 #include <fstream>
 #include <algorithm>
 
+#include <unordered_set>
+#include <vector>
+
+#include <cmath>
+#include <ctime>
+#include <cstdlib>
+
 #include "customtiles.h"
 #include "drawer.h"
 #include "fileoutput.h"
-/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+#include "movestuff.h"
+/* run this program using the console pauser or add your own getch, system("pause") or input lxoodg */
+const std::string introi=
+//"\n           Welcome to the MinerGunBuilderPathFinder MGBpf \n\n";
+"";
 
+const std::string intro=
+" 0-custom ship input  \n 1-named custom ship / bruteforce   \n 4-lite bruteforce  \n 7-classic ships (mayhaps be broken)\n";
+const std::string intro1=
+" \n 0 -sanil  \n 1 -beast  \n 2 -fat trident  \n 3 -thunder  \n 4 -staricase \n 5 -piano  \n-1 -ultrabeast  \n-2 -one of captivates ship  \n-3 -stealth bomber  \n-4 -hyperbeast  \n  \n 6-random(reccomend)  \n 7-extreme random(no reccomend) \n  8-perfect bruteforce(long time)  \n 9-wave bruteforce  \n 10-optimised random (reccomend)"
+;
+ 
+const int mania = 1;
+std::unordered_set<long long> idset;
+//std::vector<long long> idlist;
+
+void appindx(long long x) {
+    //idlist.push_back(x);
+    idset.insert(x);
+}
+
+bool isapp(long long x) {
+	return false;
+    return idset.count(x) > 0;
+}
+bool isapp2(long long x) {
+	//return false;
+    return idset.count(x) > 0;
+}
+
+double max(double a,double b){
+	if(a<b){
+		return b;
+	}else{
+		return a;	}
+};
 int main(int argc, char** argv) {
+	srand (time(NULL));
+	std::cout<<introi;
 	while(true){
 	
 	//settings
@@ -22,12 +65,13 @@ int main(int argc, char** argv) {
 	int klma=500;//retry for fail (not matter much)
 	double wem[]={0,0,0,0,-3,0,0,0,0,0,0,0,0};//weights of tiles ex.{0,0,0,0,-2.5,.5,0,0,0,0,0,0,0}
 	int maxit=50000;//maximum iteration for pathfinding (not matter much)
-	int rndrt=30;//randomly turns wrongly
+	int rndrta=30;//randomly turns wrongly
+int rndrt=30;
 	int isprt=1;//use prtals
 	bool isoutput=1;
 	
-	
-	
+	int boll[12][12];
+		int doneport=0;
 	 int code=0;
 	int tilelen=0;
 	int ptile[20]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
@@ -73,7 +117,7 @@ int main(int argc, char** argv) {
             auto delimiterPos = line.find("=");
             auto name = line.substr(0, delimiterPos);
             auto value = line.substr(delimiterPos + 1);
-            std::cout << name << " " << value << '\n';
+            //std::cout << name << " " << value << '\n';
             int num=std::atoi((value).c_str());
             
             	if(name=="0"){raytr=num;}
@@ -85,12 +129,12 @@ int main(int argc, char** argv) {
             	if(name=="5"){klma=num;}
             	//case 6: raytr=value; break;
             	if(name=="7"){maxit=num;}
-            	if(name=="8"){rndrt=num;}
+            	if(name=="8"){rndrta=num;}
             	if(name=="10"){isoutput=num;}
             	if(name=="4"){
             		
             		int lngng=0;
-            	if(line.find("01")!=line.npos){ptile[lngng]=1;lngng++;}	
+            //	if(line.find("01")!=line.npos){ptile[lngng]=1;lngng++;}	
             	if(line.find("02")!=line.npos){ptile[lngng]=2;lngng++;}	
             	if(line.find("03")!=line.npos){ptile[lngng]=3;lngng++;}	
             	if(line.find("04")!=line.npos){ptile[lngng]=4;lngng++;}	
@@ -105,7 +149,12 @@ int main(int argc, char** argv) {
 				if(line.find("13")!=line.npos){ptile[lngng]=13;lngng++;}	
 				if(line.find("14")!=line.npos){ptile[lngng]=14;lngng++;}	
 				if(line.find("15")!=line.npos){ptile[lngng]=15;lngng++;}
-				
+				if(line.find("16")!=line.npos){ptile[lngng]=16;lngng++;}
+				if(line.find("17")!=line.npos){ptile[lngng]=17;lngng++;}
+				if(line.find("18")!=line.npos){ptile[lngng]=18;lngng++;}
+				if(line.find("19")!=line.npos){ptile[lngng]=19;lngng++;}
+				if(line.find("20")!=line.npos){ptile[lngng]=20;lngng++;}
+				if(line.find("21")!=line.npos){ptile[lngng]=21;lngng++;}
 				
 				tilelen=lngng;
 			}
@@ -136,24 +185,24 @@ int main(int argc, char** argv) {
     int tile[tilelen];
 				for(int tileset=0;tileset<tilelen;tileset++){
 					tile[tileset]=ptile[tileset];
-				 std::cout  << "->" << tile[tileset] << '\n';
+			//	 std::cout  << "->" << tile[tileset] << '\n';
 }for(int tileset=0;tileset<12;tileset++){
 	if(wem[tileset]!=0){
-	std::cout << tileset+1 << " weighs " << wem[tileset] << '\n';
+//	std::cout << tileset+1 << " weighs " << wem[tileset] << '\n';
 }
 }
     
-	std::cout << '\n';
+//	std::cout << '\n';
 	
 		int gfgg=0;
 	
 	
-	std::cout<<std::endl<<"choose mod 0-custom 1-named cutsom  4-lite bruteforce 7-classic ships " ;
+	std::cout<<'\n'<<intro ;
 	std::cin>>mod;
 	if(mod==4 or mod==5){
-		std::cout<<std::endl<<"how long";
+		std::cout<<'\n'<<"how long";
 		std::cin>>brtf;
-		std::cout<<std::endl<<"choose mod 0-custom  1-named cutsom  ";
+		std::cout<<'\n'<<"choose mod 0-custom  1-named cutsom  ";
       	std::cin>>mod;
       	if(mod==5){
       		lite=1;
@@ -161,9 +210,9 @@ int main(int argc, char** argv) {
 		
 }
 if(mod==6){
-		std::cout<<std::endl<<"how long";
+		std::cout<<'\n'<<"how long";
 		std::cin>>srtf;
-		std::cout<<std::endl<<"choose mod 0-custom  1-named cutsom ";
+		std::cout<<'\n'<<"choose mod 0-custom  1-named cutsom ";
       	std::cin>>mod;
       	site=1;
 		
@@ -174,7 +223,7 @@ if(mod==6){
 	if(mod==0){
 	
 
-	std::cout<<std::endl<<"give 16 tiles ranged from 1-12"<<std::endl<<"everything goes left to right then top to bottom"<<std::endl;
+	std::cout<<'\n'<<"give 16 tiles ranged from 1-12"<<'\n'<<"everything goes left to right then top to bottom"<<'\n';
 	std::cin>>
 	inp[0][0]>>inp[0][1]>>inp[0][2]>>inp[0][3]>>
 	inp[1][0]>>inp[1][1]>>inp[1][2]>>inp[1][3]>>	
@@ -182,7 +231,7 @@ if(mod==6){
 	inp[3][0]>>inp[3][1]>>inp[3][2]>>inp[3][3];
 }
 	if(mod==1){
-		std::cout<<std::endl<<"0-sanil 1-beast 2-fat trident 3-thunder 4-staricase 5-piano 6-random(reccomend) 7-extreme random(no reccomend) 8-perfect bruteforce(long time) 9-wave bruteforce :O";
+		std::cout<<'\n'<<intro1;
 				std::cin>>modd;
 	
 	switch(modd){
@@ -216,6 +265,12 @@ if(mod==6){
 	inp[1][0]=5; inp[1][1]=5;  inp[1][2]=5; inp[1][3]=6;	
 	inp[2][0]=5; inp[2][1]=5;  inp[2][2]=5; inp[2][3]=6;
 	inp[3][0]=5; inp[3][1]=5;  inp[3][2]=5; inp[3][3]=6;
+	
+	inp[0][0]=1; inp[0][1]=5;  inp[0][2]=5; inp[0][3]=5;
+	inp[1][0]=5; inp[1][1]=5;  inp[1][2]=5; inp[1][3]=5;	
+	inp[2][0]=5; inp[2][1]=5;  inp[2][2]=5; inp[2][3]=5;
+	inp[3][0]=5; inp[3][1]=5;  inp[3][2]=5; inp[3][3]=5;
+	
 	break;
 	case 5:
 	inp[0][0]=6; inp[0][1]=6;  inp[0][2]=6; inp[0][3]=1;
@@ -241,20 +296,26 @@ if(mod==6){
 	inp[2][0]=6; inp[2][1]=6;  inp[2][2]=6; inp[2][3]=6;
 	inp[3][0]=6; inp[3][1]=6;  inp[3][2]=6; inp[3][3]=6;	
 	break;
+	case -4:
+	inp[0][0]=5; inp[0][1]=5;  inp[0][2]=5; inp[0][3]=5;
+	inp[1][0]=5; inp[1][1]=7;  inp[1][2]=5; inp[1][3]=5;	
+	inp[2][0]=5; inp[2][1]=1;  inp[2][2]=5; inp[2][3]=5;
+	inp[3][0]=5; inp[3][1]=5;  inp[3][2]=5; inp[3][3]=5;
+	break;
 	case 6:
-		brtf=5000000;
-		std::cout<<"seed this will be used for tile brutefroce(6)";
-	int gfgf;
-	std::cin>>gfgf;
+		brtf=2147483645;
+	//	std::cout<<"seed this will be used for tile brutefroce(6)";
+	//int gfgf;
+//	std::cin>>gfgf;
 //	srand(gfgf);
 	
 	break;
 		case 7:
 			brtf=2147483645;
-			std::cout<<"seed this will be used for tile brutefroce dont use 123";
+	//		std::cout<<"seed this will be used for tile brutefroce dont use";
 
-	std::cin>>gfgg;
-	srand(gfgg+code);
+	//std::cin>>gfgg;
+	//srand(gfgg+code);
 	break;
 	case 8:
 		
@@ -271,19 +332,32 @@ case 9:
 	
 	break;
 }
-	std::cout<<std::endl;}
+	std::cout<<'\n';}
 	if (mod==7){
 		int shipi=0;
-				std::cout<<std::endl<<"ship waht 0-rþder used 1-rider ... use ship id  (33broken :( )";
+				std::cout<<'\n'<<"ship waht 0-rider used 1-rider ... use ship id ";
 				std::cin>>shipi;
 				shipid=shipi;
 	}
 
 int best=0;
-
+for(int gf=0;gf<144;gf++){
+					boll[gf/12][gf%12]=0;
+					}
 	for(int bst=0;bst<brtf;bst++){
+		
+	//	rndrt=rndrta*(double)(((double)(strr)+1.0)/(bst%strr)+1.0)/5-1;
+		rndrt=rndrta*(double) (   ( (double)(strr)+0.1 ) / (   (bst%strr)+0.1    )    ) / 5.0-2 ;
+	//	rndrt*=5;
+		
 		if(GetKeyState('Q') & 0x8000){
 			break;
+		}
+		if(GetKeyState('W') & 0x8000){
+		srand (time(NULL));
+		}
+		if(GetKeyState('E') & 0x8000){
+		bst=0;
 		}
 	int sest=0;
 if(mod==1){
@@ -295,10 +369,46 @@ if(mod==1){
 	inp[2][0]=5+rand()%3; inp[2][1]=5+rand()%3; inp[2][2]=5+rand()%3; inp[2][3]=6;
 	inp[3][0]=5+rand()%3; inp[3][1]=5+rand()%3;  inp[3][2]=5+rand()%3;inp[3][3]=6;	
 	//inp[rand()%4][rand()%3]=1;
-	inp[2][1]=1;
+	inp[2][1]=mania;
+		brtf=2147483645;
 			}
 			
+		if(modd==10 and bst%tilelen==0){
 			
+			while (true){
+			
+			brtf=2147483647;
+		//	tile[rand()%tilelen]
+				inp[0][0]=tile[rand()%tilelen]; inp[0][1]=tile[rand()%tilelen];  inp[0][2]=tile[rand()%tilelen]; inp[0][3]=6;
+	inp[1][0]=tile[rand()%tilelen];inp[1][1]=tile[rand()%tilelen];  inp[1][2]=tile[rand()%tilelen]; inp[1][3]=6;	
+	inp[2][0]=tile[rand()%tilelen]; inp[2][1]=tile[rand()%tilelen]; inp[2][2]=tile[rand()%tilelen]; inp[2][3]=6;
+	inp[3][0]=tile[rand()%tilelen]; inp[3][1]=tile[rand()%tilelen];  inp[3][2]=5+rand()%3;inp[3][3]=6;	
+	//inp[rand()%4][rand()%3]=1;
+	inp[rand()%4][rand()%3]=mania;
+	
+		long long id=0;
+		for (int intar=0;intar<4;intar++){
+		for (int intak=0;intak<4;intak++){
+			int inpw=inp[intar][intak];
+
+		id=id<<(long long)4;
+		id+=(long long)inpw;
+	}
+	}
+	
+	
+
+	
+
+
+	if(isapp2(id)==false){
+		appindx(id);
+		break;
+			
+	}else{
+	//	std::cout<<id<<'\n';
+	}
+			}	}	
 			
 			
 			
@@ -309,20 +419,21 @@ if(mod==1){
 				int ejx=1;
 				int ejy=2;
 				//std::cout<<code;
-				if(tile[s-1]!=1){
+				if(tile[s-1]!=mania){
 	ejx=(code/div)%2; div*=2;
 	ejy=(code/div)%3; div*=3;
 }
+	brtf=2147483645;
 				//srand(code);
 			//	inp[rand()%4][rand()%3]=1;
 	inp[0][0]=tile[(code/div)%s];div*=s;inp[0][1]=tile[(code/div)%s];div*=s;inp[0][2]=tile[(code/div)%s];div*=s;inp[0][3]=6;
 	inp[1][0]=tile[(code/div)%s];div*=s;inp[1][1]=tile[(code/div)%s];div*=s;inp[1][2]=tile[(code/div)%s];div*=s;inp[1][3]=6;	
 	inp[2][0]=tile[(code/div)%s];div*=s;inp[2][1]=tile[(code/div)%s];div*=s;inp[2][2]=tile[(code/div)%s];div*=s;inp[2][3]=6;
 	inp[3][0]=tile[(code/div)%s];div*=s;inp[3][1]=tile[(code/div)%s];div*=s;inp[3][2]=tile[(code/div)%s];inp[3][3]=6;
-	if(tile[s-1]!=1){
+	if(tile[s-1]!=mania){
 //std::cout<<inp[2][3];
 	inp[3][2]=inp[ejy][ejx];
-	inp[ejy][ejx]=1;
+	inp[ejy][ejx]=mania;
 }
 code++;
 }
@@ -335,8 +446,9 @@ code++;
 	inp[2][0]=1+rand()%t; inp[2][1]=1+rand()%t;  inp[2][2]=1+rand()%t; inp[2][3]=1+rand()%t;
 	inp[3][0]=1+rand()%t; inp[3][1]=1+rand()%t;  inp[3][2]=1+rand()%t; inp[3][3]=6;	
 	srand(gfgg+code);
-	inp[rand()%4][rand()%3]=1;
+	inp[rand()%4][rand()%3]=mania;
 	code+=+1;
+		brtf=2147483645;
 			}
 			
 			
@@ -348,16 +460,16 @@ code++;
 				if(tile[s-1]!=1){
 	ejx=(code/div)%2; div*=2;
 	ejy=(code/div)%4; div*=4;}
-				
+			brtf=2147483645;		
 			//	inp[rand()%4][rand()%3]=1;
 	inp[0][0]=tile[(code/div)%s];div*=s;inp[0][1]=tile[(code/div)%s];div*=s;inp[0][2]=6;inp[0][3]=6;
 	inp[1][0]=tile[(code/div)%s];div*=s;inp[1][1]=tile[(code/div)%s];div*=s;inp[1][2]=6;inp[1][3]=6;	
 	inp[2][0]=tile[(code/div)%s];div*=s;inp[2][1]=tile[(code/div)%s];div*=s;inp[2][2]=6;inp[2][3]=6;
 	inp[3][0]=tile[(code/div)%s];div*=s;inp[3][1]=tile[(code/div)%s];inp[3][2]=6;inp[3][3]=6;
-	if(tile[s-1]!=1){
+	if(tile[s-1]!=mania){
 
 	inp[3][1]=inp[ejy][ejx];
-	inp[ejy][ejx]=1;
+	inp[ejy][ejx]=mania;
 
     //inp[3][2]=inp[ejy][ejx];
 //		inp[ejy][ejx]=1;
@@ -375,6 +487,17 @@ code++;
 	}
 	int iax=0;
 	int iay=0;
+	
+	for(int kol=0;kol<12;kol++){
+	for(int bol=0;bol<12;bol++){
+		arr[kol][bol]=0;
+		sarr[kol][bol]=0;
+		farr[kol][bol]=0;
+	}	
+		
+	}
+	
+	long long id=0;
 		for (int intar=0;intar<4;intar++){
 			iay=0;
 		for (int intak=0;intak<4;intak++){
@@ -392,37 +515,47 @@ code++;
 		arr[intar*3+2][intak*3+2]=cts(inpw,9);
 		buff[inpw]++;
 		iay+=3;
+		id<<4;
+		id+=inpw;
 	}
 	iax+=3;
 	}
+	if(isapp(id)==false){
+		
+	
+	appindx(id);
+	
+	
 	int xt=10;
 	int yt=11;
 		int kx=xt;
 	
 	int ky=yt;
 	int dd=0;
-	
-			
+		doneport=0;
+					doneport=0;
+				prtin[0]=-2;
+				prtot[0]=-2;
+						
 			if(mod==7 and modd<1){
 			
 				
 				
 				int	karr[12][12]={
-				0,0,0,0,0,0,0,0,0,0,0,0,	
-				1,1,1,1,1,1,1,1,1,1,1,0,
-				1,1,1,1,1,1,1,1,1,1,1,0,
-				1,1,1,1,1,1,1,1,1,1,1,0,
-				1,1,1,1,1,1,1,1,1,1,1,0,
-				1,1,1,1,1,1,1,1,1,1,1,0,
-				1,1,1,1,1,1,1,1,1,1,1,0,
-				1,1,1,1,1,1,1,1,1,1,1,0,
-				1,1,1,1,1,1,1,1,1,1,1,0,
-				1,1,1,1,1,1,1,1,1,1,1,0,
-				1,1,1,1,1,1,1,1,1,1,1,0,
-				1,1,1,1,1,1,1,1,1,1,1,0};
+				1,1,1,1,1,1,1,1,1,1,1,1,	
+				1,1,1,1,1,1,1,1,1,1,1,1,
+				1,1,1,1,1,1,1,1,1,1,1,1,
+				1,1,1,1,1,1,1,1,1,1,1,1,
+				1,1,1,1,1,1,1,1,1,1,1,1,
+				1,1,1,1,1,1,1,1,1,1,1,1,
+				1,1,1,1,1,1,1,1,1,1,1,1,
+				1,1,1,1,1,1,1,1,1,1,1,1,
+				1,1,1,1,1,1,1,1,1,1,1,1,
+				1,1,1,1,1,1,1,1,1,1,1,1,
+				1,1,1,1,1,1,1,1,1,1,1,1,
+				1,1,1,1,1,1,1,1,1,1,1,1};
 				
-				
-				
+
 				std::ifstream cFile ("class.txt");
     if (cFile.is_open())
     {
@@ -457,6 +590,9 @@ code++;
 							otot=6;}
 							if(lineread=='s'){
 							xt=krr;yt=trr;otot=-0;}
+							//if(krr==11 or trr==11 or trr==10 or krr==10){
+						//	otot=1;	
+						//	}
 						if(otot!=-69){
 						
 						karr[trr][krr]=otot;}
@@ -499,7 +635,7 @@ code++;
 		sarr[halb/12][halb%12]=arr[halb/12][halb%12];
 	//	farr[halb/12][halb%12]=arr[halb/12][halb%12];
 	}
-//	std::cout<<std::endl<<bst;
+//	std::cout<<'\n'<<bst;
 	
 	for (int ggar=0;ggar<12;ggar++){
 		
@@ -507,7 +643,7 @@ code++;
 			
 		//	std::cout<<arr[ggar][ggak];
 	}
-//	std::cout<<std::endl;
+//	std::cout<<'\n';
 	}
 	
 	
@@ -553,7 +689,7 @@ code++;
 			if(buff[6]!=minemp and minemp!=-1){
 			it=maxit;
 		}
-		int doneport=0;
+	
 		bool strtcrs=0;
 	while(arr[y][x]!=9 and it < maxit){
 		if(GetKeyState(VK_SHIFT) & 0x8000)
@@ -563,7 +699,7 @@ code++;
 		it++;
 		
 		//	std::cout<<x<<","<<y<<"'"<<dir<<","<<ogdir<<"w"<<arr[y][x];
-		//	std::cout<<std::endl;-
+		//	std::cout<<'\n';-
 		int rnd=rand()%brtf;
 		if(modd!=8){
 		
@@ -589,7 +725,7 @@ code++;
 		}	
 		}*/
 		
-		if (((arr[y][x]==0 or arr[y][x]==9 or arr[y][x]==12  or arr[y][x]==6)and(x<12 and x>-1 and y<12 and y>-1))  ){
+if (((arr[y][x]==0 or arr[y][x]==9  or arr[y][x]==6)and(x<12 and x>-1 and y<12 and y>-1))  ){
 		//	if(!(rnd<bst+brtf)){
 		for(int cros=0;cros<4;cros++){
 		for(int croc=0;croc<4;croc++){
@@ -616,7 +752,7 @@ code++;
 			}
 		nofront =   0 ;
 			if(modd!=9 and modd!=8  and (rnd>bst or (mod==4 and nofront ))or(mod==7 and rnd*2>bst)or
-			 (modd==8 and strr!=1 and 1+rand()%strr>strr/2 and bst%strr>1)){	
+			 (modd==8 and strr!=1 and 1+rand()%strr>strr/2 )or(inp[y/3][(x/3-1)]==9 and rnd>bst or (x==3 and y==5 and 0))){	
 			switch (raytr){
 			case 3:switch (dir){case 1:
 			    	if(x>2 and arr[y][x-1]==0 and arr[y][x-2]==0 and arr[y][x-3]==0){dir=4;trn++;}
@@ -681,7 +817,7 @@ code++;
 						arr[y][x]=5;
 						x--;break;
 				}
-				if(!(((arr[y][x]==0 or arr[y][x]==9 or arr[y][x]==12  or arr[y][x]==6)and(x<12 and x>-1 and y<12 and y>-1))) 
+				if(!(((arr[y][x]==0 or arr[y][x]==9 or arr[y][x]==12345  or arr[y][x]==6)and(x<12 and x>-1 and y<12 and y>-1))) 
 				){
 					
 			if(mod==7 and arr[y][x]!=1 and (arr[y][x]==dir-2 or arr[y][x]==dir+2 or arr[y][x]==dir)and
@@ -743,39 +879,98 @@ code++;
 				case 4: if(arr[y][x-1]!=0){nofront=1;}
 			}
 			
-			
-			
-		if(arr[y][x]!=1 and ( rand()%(rndrt*20)>1 )){
-			
+			isprt=1;
+		//if( bst%5!=0  and   arr[y][x]!=1 and (  doneport==1 or isprt==0 and ( rand()%(rndrt*20)>20))    or bst<5  ){
+			if( arr[y][x]!=1 and ( rand()%(rndrt)>1 or doneport==1  or (y==0) )){
+		//	std::cout<<"ccc";
 		arr[y][x]=0;}else{
+		//	std::cout<<"k";
 			int prtit=0;
 			if(doneport==0 and isprt==1){
+			//	std::cout<<"d";
+				doneport=1;
 				if(arr[y][x]==1){
 					it=maxit;
 				}
 					prtin[0]=y;
 					prtin[1]=x;
+				//	bool boll[144];
+				if(strr==1024){
+					x=(bst/2)%12;
+					y=(bst/12/2)%12;
+					
+					
+					if(arr[y][x]==0){
+					
+					prtot[0]=y;
+					prtot[1]=x;
+				}else{
+					prtin[0]=-1;
+					prtin[1]=-1;
+					
+				}
+					prtdir=(bst/144/2)%4+1;
+					
+					if(prtot[0]==0 and prtdir==4){prtdir=2;}
+					if(prtot[0]==1 and prtdir==2){prtdir=4;}
+					if(prtot[1]==0 and prtdir==1){prtdir=3;}
+					if(prtot[1]==1 and prtdir==3){prtdir=1;}
+				
+				//std::cout<<"s";
+					dir=prtdir;
+					ogdir=dir;
+					switch(dir){
+					case 1:y--;break;
+					case 2:x++;break;
+					case 3:y++;break;
+					case 4:x--;break;
+					
+			}
+				}else{
+				
 				while(arr[y][x]!=0 and prtit<144){
 					prtit++;
 					if(mod==7){
 					
 					x=rand()%11;
 					y=1+rand()%11;}else{
-						x=rand()%12;
+						while(boll[x][y]!=0 and rand()%5!=1){
+						
+					x=rand()%12;
 					y=rand()%12;
+					
+					if(boll[x][y]==1 and x>1){
+						x--;
+					}
+					if(bst<144*144*4){
+					x=bst%12;
+					y=(bst/12)%12;	
+						
+					}
+				}
 					}
 					if(arr[y][x]!=0){
 						prtot[0]=y;
 					prtot[1]=x;
+					boll[x][y]=1;
 					}
 				}
 				if(prtit==144){
 					it=maxit;
+					doneport=0;
+					for(int gf=0;gf<144;gf++){
+					boll[gf/12][gf%12]=0;
+					}
 				}else{
 					prtot[0]=y;
 					prtot[1]=x;
 					prtdir=1+rand()%4;
-					doneport=1;
+					if(prtot[0]==0 and prtdir==4){prtdir=2;}
+					if(prtot[0]==1 and prtdir==2){prtdir=4;}
+					if(prtot[1]==0 and prtdir==1){prtdir=3;}
+					if(prtot[1]==1 and prtdir==3){prtdir=1;}
+				
+				//std::cout<<"s";
 					dir=prtdir;
 					ogdir=dir;
 					switch(dir){
@@ -784,7 +979,7 @@ code++;
 					case 3:y++;break;
 					case 4:x--;break;
 				}
-				}
+				}}
 				
 			}else{
 		//	std::cout<<"";
@@ -842,123 +1037,117 @@ code++;
 				dirch=klma-kilo;
 			}
 			//std::cout<<"asldk";
-	if((rand()%klma>dirch)or(rand()%rndrt==2)){		
-			if(ogdir==1){
-			
-				switch(dir){
-					case 1:
-						dir=4;
-					break;
-					case 4:
-						dir=2;
-					break;
-					case 2:
-						y--;
-					break;
-				}
-			}
-			if(ogdir==2){
-			
-				switch(dir){
-					case 2:
-						dir=1;
-					break;
-					case 1:
-						dir=3;
-					break;
-					case 3:
-						x--;;
-					break;
-				}
-			}
-			if(ogdir==3){
-				switch(dir){
-					case 3:
-						dir=2;
-					break;
-					case 2:
-						dir=4;
-					break;
-					case 4:
-						y++;;
-					break;
-				}
-			}
-			if(ogdir==4){
-			
-			
-				switch(dir){
-					case 4:
-						dir=3;
-					break;
-					case 3:
-						dir=1;
-					break;
-					case 1:
-						x++;;
-					break;
-				}
-			}
-
-}else{
-			if(ogdir==3){
-			
-				switch(dir){
-					case 3:
-						dir=4;
-					break;
-					case 4:
-						dir=2;
-					break;
-					case 2:
-						y++;
-					break;
-				}
-			}
-			if(ogdir==4){
-			
-				switch(dir){
-					case 4:
-						dir=1;
-					break;
-					case 1:
-						dir=3;
-					break;
-					case 3:
-						x++;;
-					break;
-				}
-			}
-			if(ogdir==1){
-				switch(dir){
-					case 1:
-						dir=2;
-					break;
-					case 2:
-						dir=4;
-					break;
-					case 4:
-						y--;;
-					break;
-				}
-			}
-			if(ogdir==2){
-			
-			
-				switch(dir){
-					case 2:
-						dir=3;
-					break;
-					case 3:
-						dir=1;
-					break;
-					case 1:
-						x--;;
-					break;
-				}
-			}
-	
-	}
+	if (rand() % klma > dirch or rand() % rndrt == 2) {
+  switch (ogdir) {
+        case 1:
+            switch (dir) {
+                case 1:
+                    dir = 4;
+                    break;
+                case 4:
+                    dir = 2;
+                    break;
+                case 2:
+                    y--;
+                    break;
+            }
+            break;
+        case 2:
+            switch (dir) {
+                case 2:
+                    dir = 1;
+                    break;
+                case 1:
+                    dir = 3;
+                    break;
+                case 3:
+                    x--;
+                    break;
+            }
+            break;
+        case 3:
+            switch (dir) {
+                case 3:
+                    dir = 2;
+                    break;
+                case 2:
+                    dir = 4;
+                    break;
+                case 4:
+                    y++;
+                    break;
+            }
+            break;
+        case 4:
+            switch (dir) {
+                case 4:
+                    dir = 3;
+                    break;
+                case 3:
+                    dir = 1;
+                    break;
+                case 1:
+                    x++;
+                    break;
+            }
+            break;
+    }
+} else {
+    switch (ogdir) {
+        case 1:
+            switch (dir) {
+                case 1:
+                    dir = 2;
+                    break;
+                case 2:
+                    dir = 4;
+                    break;
+                case 4:
+                    y--;
+                    break;
+            }
+            break;
+        case 2:
+            switch (dir) {
+                case 2:
+                    dir = 3;
+                    break;
+                case 3:
+                    dir = 1;
+                    break;
+                case 1:
+                    x--;
+                    break;
+            }
+            break;
+        case 3:
+            switch (dir) {
+                case 3:
+                    dir = 4;
+                    break;
+                case 4:
+                    dir = 2;
+                    break;
+                case 2:
+                    y++;
+                    break;
+            }
+            break;
+        case 4:
+            switch (dir) {
+                case 4:
+                    dir = 1;
+                    break;
+                case 1:
+                    dir = 3;
+                    break;
+                case 3:
+                    x++;
+                    break;
+            }
+            break;
+    }
+}
 	
 	
 		}
@@ -1013,7 +1202,7 @@ code++;
 
 }*/
 
-if(doneport==0){
+if(doneport==0 or false){
 //	arr[prtot[0]][prtot[1]]==0;
 //	arr[prtin[0]][prtin[1]]==0;
 }else{
@@ -1129,7 +1318,7 @@ if(mod==7 and modd==8){
 			
 		}
 	pth4=pth3-trn;
-	}if(it==maxit){
+	}if(it==maxit ){
 	pth4-=100;}
 		wem[6]=0;	wem[6]=0;
 	
@@ -1141,8 +1330,18 @@ if(mod==7 and modd==8){
 		pth4=0;
 		
 	}
+	
 	//pth4-=ptrn;//std::cout<<trn;
-	if(pth4>best-telo or brtf<10){
+	if((pth4>best-telo /*and (pth4>best or isapp(id) )*/) or brtf<10){
+		
+		
+		/////////////////////////////////////////////////////
+		
+		
+		
+		
+		
+		
 		if(pth4>best){//////////////////////////////////////////////
 	best=pth4;}
 	int pth2=0;
@@ -1151,12 +1350,17 @@ if(mod==7 and modd==8){
 	
 
 
-	std::cout<<std::endl;
+	std::cout<<'\n';
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	if(doneport==1){
-		std::cout<<"(uses portals)"<<std::endl;
+		std::cout<<"(uses portals)"<<'\n';
 	sarr[prtin[0]][prtin[1]]=11;
-	sarr[prtot[0]][prtot[1]]=12;	}
+	sarr[prtot[0]][prtot[1]]=12;
+	arr[prtin[0]][prtin[1]]=11;
+	arr[prtot[0]][prtot[1]]=12;
+	farr[prtin[0]][prtin[1]]=11;
+	farr[prtot[0]][prtot[1]]=12;	}
+
 	
 	for (int ggar=0;ggar<12;ggar++){
 		
@@ -1173,9 +1377,9 @@ if(mod==7 and modd==8){
 			SetConsoleTextAttribute(hConsole,color(mod,ggar,ggak,inp,search));
 			
 			
-			draw(search,empt,pth2,farr[ggar][ggak]);
+			draw(search,empt,pth2,farr[ggar][ggak],prtdir);
 			SetConsoleTextAttribute(hConsole, 15);}
-	std::cout<<std::endl;
+	std::cout<<'\n';
 	}//SetConsoleTextAttribute(hConsole, 0);
 	
 	/*emp=0;//empty
@@ -1194,8 +1398,8 @@ if(mod==7 and modd==8){
 	 	it=maxit;
 	 }
 	if(it==maxit){
-		std::cout<<"there no path thogh"<<std::endl;
-		std::cout<<std::endl<<best<<"-"<<bst;
+		std::cout<<"there no path thogh"<<'\n';
+		std::cout<<'\n'<<best<<"-"<<bst;
 		bst--;
 		kilo++;
 		if(kilo>klma){
@@ -1203,33 +1407,140 @@ if(mod==7 and modd==8){
 			bst++;
 		}
 	}else{
-		if(isoutput){
-		outfileput(farr,inp,sarr);
-	}}
+		}
 		ptrn=trn;//
-	std::cout<<std::endl;
-//	std::cout<<strr<<std::endl;
-	std::cout<<std::endl;
-	std::cout<<"path lenght"<<pth3-trn<<std::endl;
-	std::cout<<"turns"<<trn<<std::endl;
-	std::cout<<"firerate"<<3.2-(.2*buff[5])<<std::endl;
-	int bsdmg=((500)*1.3*6*5)*(1+ptrn/10.0+ptrn/10.0+.6);
-	std::cout<<"basedmg"<<bsdmg<<std::endl;
-	std::cout<<"dps(not so accurate)"<<(  bsdmg*(pow(1.4,(pth3-12)))    )*(3.2-(.2*buff[5]))*((pow(0.333,buff[5])))<<std::endl;
+	std::cout<<'\n';
+//	std::cout<<strr<<'\n';
+
+double bsdmg=((500)*1.3*6*5)*(1+ptrn/10.0+ptrn/10.0+.6);
+double dps=(  bsdmg*(pow(1.4,(pth3-12)))    )*(3.2-(.2*buff[5]))*((pow(0.333,buff[5])));
+	std::cout<<'\n';
+	std::cout<<"TIER RANK - ";
+	int ranka =(int)floor(log10(dps));
+	int rankb = max(0,((pth3-buff[5]*3)/2.5)-19);
+	int rankc = max(0,(((pth3-buff[5]*2.5))/75*5)*2-6);
+	int rankd = floor(2.0*best/37.0);
+	int ranke = ((best)*(pth3-buff[5]*2.5)/300);
+	int rankf = ranke+rankd-30+19;
+	switch(rankf){
+		case -11: SetConsoleTextAttribute(hConsole, 12); std::cout<<"Congrats"<<'\n'; break;
+		case -10: SetConsoleTextAttribute(hConsole, 9); std::cout<<"Cant get any worse than that"<<'\n'; break;
+		case -9: SetConsoleTextAttribute(hConsole, 6); std::cout<<"???"<<'\n'; break;
+		case -8: SetConsoleTextAttribute(hConsole, 6); std::cout<<"??"<<'\n'; break;
+		case -7: SetConsoleTextAttribute(hConsole, 6); std::cout<<"?"<<'\n'; break;
+		case -6: SetConsoleTextAttribute(hConsole, 6); std::cout<<"F---"<<'\n'; break;
+		case -5: SetConsoleTextAttribute(hConsole, 6); std::cout<<"F---"<<'\n'; break;
+		case -4: SetConsoleTextAttribute(hConsole, 6); std::cout<<"F--"<<'\n'; break;
+		case -3: SetConsoleTextAttribute(hConsole, 6); std::cout<<"F--"<<'\n'; break;
+		case -2: SetConsoleTextAttribute(hConsole, 6); std::cout<<"F-"<<'\n'; break;
+		case -1: SetConsoleTextAttribute(hConsole, 6); std::cout<<"F-"<<'\n'; break;
+		case 0: SetConsoleTextAttribute(hConsole, 6); std::cout<<"F"<<'\n'; break;
+		case 1: SetConsoleTextAttribute(hConsole, 6); std::cout<<"F+"<<'\n'; break;
+		case 2: SetConsoleTextAttribute(hConsole, 4); std::cout<<"D"<<'\n'; break;
+		case 3: SetConsoleTextAttribute(hConsole, 4); std::cout<<"D+"<<'\n'; break;
+		case 4: SetConsoleTextAttribute(hConsole, 2); std::cout<<"C"<<'\n'; break;
+		case 5: SetConsoleTextAttribute(hConsole, 2); std::cout<<"C+"<<'\n'; break;
+		case 6: SetConsoleTextAttribute(hConsole, 1); std::cout<<"B"<<'\n'; break;
+		case 7: SetConsoleTextAttribute(hConsole, 1); std::cout<<"B+"<<'\n'; break;
+		case 8: SetConsoleTextAttribute(hConsole, 9); std::cout<<"A"<<'\n'; break;
+		case 9: SetConsoleTextAttribute(hConsole, 9); std::cout<<"A+"<<'\n'; break;
+		case 10: SetConsoleTextAttribute(hConsole, 14); std::cout<<"S"<<'\n'; break;
+		case 11: SetConsoleTextAttribute(hConsole, 14); std::cout<<"S+"<<'\n'; break;
+		case 12: SetConsoleTextAttribute(hConsole, 14); std::cout<<"SS"<<'\n'; break;
+		case 13: SetConsoleTextAttribute(hConsole, 14); std::cout<<"SS+"<<'\n'; break;
+		case 14: SetConsoleTextAttribute(hConsole, 14); std::cout<<"SSS"<<'\n'; break;
+		case 15: SetConsoleTextAttribute(hConsole, 14); std::cout<<"SSS+"<<'\n'; break;
+		case 16: SetConsoleTextAttribute(hConsole, 11); std::cout<<"L"<<'\n'; break;
+		default: SetConsoleTextAttribute(hConsole, 13); std::cout<<"G"<<'\n'; break;
+	}
+	std::cout<<ranka<<" - "<<rankb<<" - "<<rankc<<" - "<<rankd<<" - "<<ranke<<" - "<<rankf;
+	 SetConsoleTextAttribute(hConsole, 15);
+	std::cout<<'\n';
+	std::cout<<"WAVE RANK - ";
+	int wranka =(int)floor(log10(dps));
+	int wrankb = max(0,((pth3-buff[5]*3+buff[6]*2+buff[7]+buff[12])/2.5)-19);
+	int wrankc = max(0,(((pth3-buff[5]*2.5)+buff[6]*2+buff[7])/75*5)*2-6);
+	int wrankd = floor(2.0*(best+buff[6]*buff[6]+buff[7])/37.0);
+	int wranke = ((best)*(pth3-buff[5]*6+buff[6]*4+buff[7])/300);
+	int wrankf = wrankb+wrankd-30+19-3-6;
+	switch(wrankf){
+		case -11: SetConsoleTextAttribute(hConsole, 12); std::cout<<"Congrats"<<'\n'; break;
+		case -10: SetConsoleTextAttribute(hConsole, 9); std::cout<<"Cant get any worse than that"<<'\n'; break;
+		case -9: SetConsoleTextAttribute(hConsole, 6); std::cout<<"???"<<'\n'; break;
+		case -8: SetConsoleTextAttribute(hConsole, 6); std::cout<<"??"<<'\n'; break;
+		case -7: SetConsoleTextAttribute(hConsole, 6); std::cout<<"?"<<'\n'; break;
+		case -6: SetConsoleTextAttribute(hConsole, 6); std::cout<<"F---"<<'\n'; break;
+		case -5: SetConsoleTextAttribute(hConsole, 6); std::cout<<"F---"<<'\n'; break;
+		case -4: SetConsoleTextAttribute(hConsole, 6); std::cout<<"F--"<<'\n'; break;
+		case -3: SetConsoleTextAttribute(hConsole, 6); std::cout<<"F--"<<'\n'; break;
+		case -2: SetConsoleTextAttribute(hConsole, 6); std::cout<<"F-"<<'\n'; break;
+		case -1: SetConsoleTextAttribute(hConsole, 6); std::cout<<"F-"<<'\n'; break;
+		case 0: SetConsoleTextAttribute(hConsole, 6); std::cout<<"F"<<'\n'; break;
+		case 1: SetConsoleTextAttribute(hConsole, 6); std::cout<<"F+"<<'\n'; break;
+		case 2: SetConsoleTextAttribute(hConsole, 4); std::cout<<"D"<<'\n'; break;
+		case 3: SetConsoleTextAttribute(hConsole, 4); std::cout<<"D+"<<'\n'; break;
+		case 4: SetConsoleTextAttribute(hConsole, 2); std::cout<<"C"<<'\n'; break;
+		case 5: SetConsoleTextAttribute(hConsole, 2); std::cout<<"C+"<<'\n'; break;
+		case 6: SetConsoleTextAttribute(hConsole, 1); std::cout<<"B"<<'\n'; break;
+		case 7: SetConsoleTextAttribute(hConsole, 1); std::cout<<"B+"<<'\n'; break;
+		case 8: SetConsoleTextAttribute(hConsole, 9); std::cout<<"A"<<'\n'; break;
+		case 9: SetConsoleTextAttribute(hConsole, 9); std::cout<<"A+"<<'\n'; break;
+		case 10: SetConsoleTextAttribute(hConsole, 14); std::cout<<"S"<<'\n'; break;
+		case 11: SetConsoleTextAttribute(hConsole, 14); std::cout<<"S+"<<'\n'; break;
+		case 12: SetConsoleTextAttribute(hConsole, 14); std::cout<<"SS"<<'\n'; break;
+		case 13: SetConsoleTextAttribute(hConsole, 14); std::cout<<"SS+"<<'\n'; break;
+		case 14: SetConsoleTextAttribute(hConsole, 14); std::cout<<"SSS"<<'\n'; break;
+		case 15: SetConsoleTextAttribute(hConsole, 14); std::cout<<"SSS+"<<'\n'; break;
+		case 16: SetConsoleTextAttribute(hConsole, 11); std::cout<<"L"<<'\n'; break;
+		case 17: SetConsoleTextAttribute(hConsole, 11); std::cout<<"L+"<<'\n'; break;
+		case 18: SetConsoleTextAttribute(hConsole, 11); std::cout<<"L++"<<'\n'; break;
+		case 19: SetConsoleTextAttribute(hConsole, 11); std::cout<<"L+++"<<'\n'; break;
+		default: SetConsoleTextAttribute(hConsole, 13); std::cout<<"G"<<'\n'; break;
+	}
+	std::cout<<wranka<<" - "<<wrankb<<" - "<<wrankc<<" - "<<wrankd<<" - "<<wranke<<" - "<<wrankf;
 	
-	if(buff[5]>0){std::cout<<"damage reduction: "<<(1-pow(0.333,buff[5]))<<std::endl;}
-	if(buff[3]>0){std::cout<<"additional trys: "<<buff[3]<<std::endl;}
-	if(buff[9]>0){std::cout<<"chane to skip a wave: "<<(1-pow(0.9,buff[9]))<<std::endl;}
-	if(buff[7]){std::cout<<"wave countdown lasts longer: "<<(1+3*buff[7])<<std::endl;}
-	if(buff[10]>0){std::cout<<"more rc: "<<(1-pow(0.995,buff[10]))<<std::endl;}
-	if(buff[12]>0){std::cout<<"chance to get 1 rc per wave: "<<(1+3*buff[12])<<std::endl;}
-	if(buff[6]>0){std::cout<<"increased speed between waves: "<<5*(pow(0.8,buff[6]))<<std::endl;}
-	if(buff[2]>0){std::cout<<"has autopilot: "<<std::endl;}
-	if(buff[8]>0){std::cout<<"skip last distance by: "<<(1-pow(0.85,buff[8]))<<std::endl;}
-	if(brtf>10){std::cout<<std::endl<<best<<"@"<<bst<<"-"<<code;}
-	//std::cout<<std::endl<<wem[5];
+	int qualitt[12]={ranka,rankb,rankc,rankd,ranke,rankf,wranka,wrankb,wrankc,wrankd,wranke,wrankf};
 	
-}
+	
+/*	switch(rankd){
+		case 0: SetConsoleTextAttribute(hConsole, 6); std::cout<<"F"<<'\n'; break;
+		case 1: SetConsoleTextAttribute(hConsole, 4); std::cout<<"D"<<'\n'; break;
+		case 2: SetConsoleTextAttribute(hConsole, 2); std::cout<<"C"<<'\n'; break;
+		case 3: SetConsoleTextAttribute(hConsole, 1); std::cout<<"B"<<'\n'; break;
+		case 4: SetConsoleTextAttribute(hConsole, 9); std::cout<<"A"<<'\n'; break;
+		case 5: SetConsoleTextAttribute(hConsole, 14); std::cout<<"S"<<'\n'; break;
+		case 6: SetConsoleTextAttribute(hConsole, 11); std::cout<<"L"<<'\n'; break;
+		default: SetConsoleTextAttribute(hConsole, 13); std::cout<<"G"<<'\n'; break;
+	}*/
+	 SetConsoleTextAttribute(hConsole, 15);
+	
+	std::cout<<'\n';
+	std::cout<<"path lenght"<<pth3-trn<<'\n';
+	std::cout<<"turns"<<trn<<'\n';
+	std::cout<<"firerate"<<3.2-(.2*buff[5])<<'\n';
+	
+	std::cout<<"basedmg"<<bsdmg<<'\n';
+	std::cout<<"dps(not so accurate)"<<dps<<'\n';
+	
+	if(buff[5]>0){std::cout<<"damage reduction: "<<(1-pow(0.333,buff[5]))<<'\n';}
+	if(buff[3]>0){std::cout<<"additional trys: "<<buff[3]<<'\n';}
+	if(buff[9]>0){std::cout<<"chane to skip a wave: "<<(1-pow(0.9,buff[9]))<<'\n';}
+	if(buff[7]){std::cout<<"wave countdown lasts longer: "<<(1+3*buff[7])<<'\n';}
+	if(buff[10]>0){std::cout<<"more rc: "<<(1-pow(0.995,buff[10]))<<'\n';}
+	if(buff[12]>0){std::cout<<"chance to get 1 rc pefour wave: "<<(1+3*buff[12])<<'\n';}
+	if(buff[6]>0){std::cout<<"increased speed between waves: "<<5*(pow(0.8,buff[6]))<<'\n';}
+	if(buff[2]>0){std::cout<<"has autopilot: "<<'\n';}
+	if(buff[8]>0){std::cout<<"skip last distance by: "<<(1-pow(0.85,buff[8]))<<'\n';}
+	if(brtf>10){std::cout<<'\n'<<best<<"@"<<bst<<"-"<<code<<" -%"<<rndrt;}
+	//std::cout<<'\n'<<wem[5];
+	
+	
+	if(isoutput){
+		outfileput(farr,inp,sarr,qualitt);
+	}
+	
+	
+}}appindx(id);
 }
 
 	system("pause");}

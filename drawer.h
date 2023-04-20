@@ -31,7 +31,7 @@ if(mod==1 or mod==2 or mod==0){
 					case 19:output=14;break;
 					case 20:output=13;break;
 					
-					
+					default:output=(inp[ggar/3][ggak/3])%15+1;break;
 					
 					
 				}
@@ -46,7 +46,7 @@ if(mod==1 or mod==2 or mod==0){
 			case 6:output=15;break;
 			case 9:output=12;break;
 			case 11:output=14;break;
-			case 12:output=9;break;
+			case 12:output=11;break;
 			default:output=15;
 			
 		}
@@ -55,7 +55,7 @@ if(mod==1 or mod==2 or mod==0){
 	
 			return output;	
 };
-draw(int search,int empt,int pth2,int rs){
+void draw(int search,int empt,int pth2,int rs,int prtdir){
 	int indx=rs;
 /*	switch(search){
 				case 0:std::cout<<" ";empt++;break;
@@ -96,7 +96,18 @@ draw(int search,int empt,int pth2,int rs){
 				case 6: std::cout<<'+';break;
 				case 9: std::cout<<'@';break;
 				case 11:std::cout<<'O' ;break;
-				case 12: std::cout<<'O';break;
+				case 12: 
+				switch(prtdir){
+					case 1:std::cout<<'^'; break;
+					case 2:std::cout<<'>'; break;
+					case 3:std::cout<<'v'; break;
+					case 4:std::cout<<'<'; break;
+					
+					default: std::cout<<'O'; break;
+				}
+				
+				
+				break;
 				
 				case 112: std::cout<<'>'; break;
 				case 114: std::cout<<'<'; break;
@@ -111,6 +122,6 @@ draw(int search,int empt,int pth2,int rs){
 				case 143: std::cout<<'v'; break;
 				
 				
-				default: std::cout<<'?'; break;}
+				default: std::cout<<'"'<<indx<<'"'; break;}
 	
 }
